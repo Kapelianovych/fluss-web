@@ -5,7 +5,7 @@
 ## Example use
 
 ```typescript
-const maybeBlock: Maybe<Element> = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return null if element doesn't exist on the page.
+const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return null if element doesn't exist on the page.
 ```
 
 ## @fluss/web's advantages
@@ -24,10 +24,9 @@ npm i @fluss/web
 
 ## API
 
-> In typescript examples is used [Flow](https://flow.org)'s comment notation.
+> In TypeScript examples is used [Flow](https://flow.org)'s comment notation if type is inferred.
 
 > **Each function must have no more than 3 arguments.**
-> Using functions with long arguments list is not comfortable and convenient.
 
 ### querySelector
 
@@ -41,7 +40,7 @@ function querySelector<T extends Element>(
 Select element on the page.
 
 ```typescript
-const same /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd'); // search inside whole document
+const same /*: Maybe<Element> */ = querySelector('.gd'); // search inside whole document
 const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same); // search inside same
 ```
 
@@ -75,7 +74,7 @@ function closest<T extends Element>(selector: string, child: Element): Maybe<T>;
 Find closest ancestor that match selector.
 
 ```typescript
-const parent /*: Maybe<HTMLElement> */ = closest<HTMLElement>(
+const parent /*: Maybe<Element> */ = closest(
   '.block',
   childElement
 );
