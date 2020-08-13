@@ -31,7 +31,7 @@ npm i @fluss/web
 ### querySelector
 
 ```typescript
-function querySelector<T extends Element>(
+function querySelector<T extends Element = Element>(
   selector: string,
   parent?: ParentNode
 ): Maybe<T>;
@@ -47,7 +47,7 @@ const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same);
 ### querySelectorAll
 
 ```typescript
-function querySelectorAll<T extends Element>(
+function querySelectorAll<T extends Element = Element>(
   selector: string,
   parent?: ParentNode
 ): ReadonlyArray<T>;
@@ -68,7 +68,7 @@ const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
 ### closest
 
 ```typescript
-function closest<T extends Element>(selector: string, child: Element): Maybe<T>;
+function closest<T extends Element = Element>(selector: string, child: Element): Maybe<T>;
 ```
 
 Find closest ancestor that match selector.

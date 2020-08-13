@@ -1,4 +1,4 @@
-export function querySelectorAll<T extends Element>(
+export function querySelectorAll<T extends Element = Element>(
   selector: string,
   parent: ParentNode = document
 ): ReadonlyArray<T> {

@@ -7,6 +7,9 @@ describe('querySelector', () => {
     `;
 
     expect(querySelector('.el').isJust()).toBe(true);
+    expect(querySelector('.el').extract().outerHTML).toMatch(
+      '<div class="el"></div>'
+    );
   });
 
   test('querySelector function do not fail if element is not exists', () => {

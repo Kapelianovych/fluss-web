@@ -5,7 +5,7 @@ declare module "@fluss/web" {
    * Select element from parent node. By default selects from **document**.
    * Safe variant of `document.querySelector` method.
    */
-  export function querySelector<T extends Element>(
+  export function querySelector<T extends Element = Element>(
     selector: string,
     parent?: ParentNode
   ): Maybe<T>;
@@ -14,7 +14,7 @@ declare module "@fluss/web" {
    * Select elements from parent node. By default selects from **document**.
    * Functional variant of `document.querySelectorAll` method.
    */
-  export function querySelectorAll<T extends Element>(
+  export function querySelectorAll<T extends Element = Element>(
     selector: string,
     parent?: ParentNode
   ): ReadonlyArray<T>;
@@ -23,7 +23,7 @@ declare module "@fluss/web" {
    * Gets parent element of child element.
    * Safe variant of `child.closest` method.
    */
-  export function closest<T extends Element>(
+  export function closest<T extends Element = Element>(
     selector: string,
     child: Element
   ): Maybe<T>;
