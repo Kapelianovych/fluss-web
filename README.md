@@ -68,16 +68,16 @@ const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
 ### closest
 
 ```typescript
-function closest<T extends Element = Element>(selector: string, child: Element): Maybe<T>;
+function closest<T extends Element = Element>(
+  selector: string,
+  child: Element
+): Maybe<T>;
 ```
 
 Find closest ancestor that match selector.
 
 ```typescript
-const parent /*: Maybe<Element> */ = closest(
-  '.block',
-  childElement
-);
+const parent /*: Maybe<Element> */ = closest('.block', childElement);
 ```
 
 ### createElement
@@ -105,4 +105,20 @@ Creates text string from specified value.
 
 ```typescript
 const textElement /*: Wrapper<Text> */ = createTextNode('Yay!');
+```
+
+### setAttribute
+
+```typescript
+function setAttribute<T extends Element = Element>(
+  element: T,
+  key: string,
+  value: string
+): void;
+```
+
+Set attribute for element.
+
+```typescript
+querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 ```

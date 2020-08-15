@@ -1,6 +1,6 @@
-import { Maybe, Wrapper } from "@fluss/core";
+import { Maybe, Wrapper } from '@fluss/core';
 
-declare module "@fluss/web" {
+declare module '@fluss/web' {
   /**
    * Select element from parent node. By default selects from **document**.
    * Safe variant of `document.querySelector` method.
@@ -42,4 +42,11 @@ declare module "@fluss/web" {
    * Alternative to `document.createTextNode` method.
    */
   export function createTextNode(data: string): Wrapper<Text>;
+
+  /** Set attribute for element. */
+  export function setAttribute<T extends Element = Element>(
+    element: T,
+    key: string,
+    value: string
+  ): void;
 }
