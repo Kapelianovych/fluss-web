@@ -57,4 +57,7 @@ declare module '@fluss/web' {
 
   /** Checks if element has attribute. */
   export function hasAttribute(element: Element, name: string): boolean;
+
+  /** Removes attribute from element if it has one. */
+  export function removeAttribute(element: Element, name: string): void;
 }

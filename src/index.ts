@@ -5,4 +5,5 @@ export { hasAttribute } from './has_attribute';
 export { querySelector } from "./query_selector";
 export { createElement } from "./create_element";
 export { createTextNode } from "./create_text_node";
+export { removeAttribute } from './remove_attribute';
 export { querySelectorAll } from "./query_selector_all";

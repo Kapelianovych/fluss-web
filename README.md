@@ -146,3 +146,21 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
   .map((el) => hasAttribute(el, 'class'))
   .extract();
 ```
+
+### removeAttribute
+
+```typescript
+function removeAttribute(element: Element, name: string): void;
+```
+
+Removes attribute from element if it has one.
+
+```typescript
+const hasElementAttribute /*: boolean */ = querySelector('div')
+  .map((el) => {
+    removeAttribute(el, 'class');
+    return el;
+  })
+  .map(el => hasAttribute(el, 'class'))
+  .extract();
+```
