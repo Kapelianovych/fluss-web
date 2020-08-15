@@ -1,5 +1,5 @@
-export function setAttribute<T extends Element = Element>(
-  element: T,
+export function setAttribute(
+  element: Element,
   key: string,
   value: string
 ): void {

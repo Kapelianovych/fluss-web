@@ -44,8 +44,8 @@ declare module '@fluss/web' {
   export function createTextNode(data: string): Wrapper<Text>;
 
   /** Set attribute for element. */
-  export function setAttribute<T extends Element = Element>(
-    element: T,
+  export function setAttribute(
+    element: Element,
     key: string,
     value: string
   ): void;
@@ -53,8 +53,8 @@ declare module '@fluss/web' {
   /**
    * Get attribute value of element.
    */
-  export function getAttribute<T extends Element = Element>(
-    element: T,
-    name: string
-  ): Maybe<string>;
+  export function getAttribute(element: Element, name: string): Maybe<string>;
+
+  /** Checks if element has attribute. */
+  export function hasAttribute(element: Element, name: string): boolean;
 }

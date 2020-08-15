@@ -110,11 +110,7 @@ const textElement /*: Wrapper<Text> */ = createTextNode('Yay!');
 ### setAttribute
 
 ```typescript
-function setAttribute<T extends Element = Element>(
-  element: T,
-  key: string,
-  value: string
-): void;
+function setAttribute(element: Element, key: string, value: string): void;
 ```
 
 Set attribute for element.
@@ -126,10 +122,7 @@ querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 ### getAttribute
 
 ```typescript
-function getAttribute<T extends Element = Element>(
-  element: T,
-  name: string
-): Maybe<string>;
+function getAttribute(element: Element, name: string): Maybe<string>;
 ```
 
 Gets attribute value of element.
@@ -138,4 +131,18 @@ Gets attribute value of element.
 const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
   getAttribute(el, 'class')
 );
+```
+
+### hasAttribute
+
+```typescript
+function hasAttribute(element: Element, name: string): boolean;
+```
+
+Checks if element has attribute.
+
+```typescript
+const hasElementAttribute /*: boolean */ = querySelector('div')
+  .map((el) => hasAttribute(el, 'class'))
+  .extract();
 ```

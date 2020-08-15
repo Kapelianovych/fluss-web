@@ -5,7 +5,7 @@ describe('getAttribute', () => {
     document.body.innerHTML = '<p class="p"></p>';
 
     expect(
-      querySelector('p')
+      querySelector<HTMLParagraphElement>('p')
         .chain((el) => getAttribute(el, 'class'))
         .extract()
     ).toBe('p');

@@ -1,7 +1,7 @@
 import { maybeOf, Maybe } from '@fluss/core';
 
-export function getAttribute<T extends Element = Element>(
-  element: T,
+export function getAttribute(
+  element: Element,
   name: string
 ): Maybe<string> {
   return maybeOf(element.getAttribute(name));
