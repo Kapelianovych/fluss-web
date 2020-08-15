@@ -122,3 +122,20 @@ Set attribute for element.
 ```typescript
 querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 ```
+
+### getAttribute
+
+```typescript
+function getAttribute<T extends Element = Element>(
+  element: T,
+  name: string
+): Maybe<string>;
+```
+
+Gets attribute value of element.
+
+```typescript
+const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
+  getAttribute(el, 'class')
+);
+```

@@ -49,4 +49,12 @@ declare module '@fluss/web' {
     key: string,
     value: string
   ): void;
+
+  /**
+   * Get attribute value of element.
+   */
+  export function getAttribute<T extends Element = Element>(
+    element: T,
+    name: string
+  ): Maybe<string>;
 }

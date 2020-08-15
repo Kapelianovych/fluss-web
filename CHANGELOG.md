@@ -2,7 +2,7 @@
 
 ### Added
 
-- `setAttribute` function.
+- `setAttribute`, `getAttribute` function.
 
 ## [0.1.1] - 2020-08-13
 
