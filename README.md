@@ -178,3 +178,17 @@ querySelector('p').map((el) => {
   createElement('a').map((a) => append(el, a));
 });
 ```
+
+### prepend
+
+```typescript
+function prepend(parent: ParentNode, ...childs: Array<string | Node>): void;
+```
+
+Insert _childs_ before first child of _parent_ element. Strings are are teplaced with `Text` elements.
+
+```typescript
+querySelector('p').map((el) => {
+  createElement('a').map((a) => prepend(el, a));
+});
+```

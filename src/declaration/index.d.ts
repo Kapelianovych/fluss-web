@@ -69,4 +69,13 @@ declare module '@fluss/web' {
     parent: ParentNode,
     ...childs: Array<string | Node>
   ): void;
+
+  /** 
+   * Insert _childs_ before first child of _parent_ element.
+   * Strings are are teplaced with `Text` elements. 
+   */
+  export function prepend(
+    parent: ParentNode,
+    ...childs: Array<string | Node>
+  ): void;
 }
