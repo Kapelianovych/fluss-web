@@ -26,8 +26,6 @@ npm i @fluss/web
 
 > In TypeScript examples is used [Flow](https://flow.org)'s comment notation if type is inferred.
 
-> **Each function must have no more than 3 arguments.**
-
 ### querySelector
 
 ```typescript
@@ -214,4 +212,16 @@ Replace _node_ with _newNodes_. Strings are replaced with `Text`s.
 querySelector('p').map((el) => {
   createElement('a').map((a) => replace(el, a));
 });
+```
+
+### replace
+
+```typescript
+export function remove(node: ChildNode): void;
+```
+
+Removes _node_.
+
+```typescript
+querySelector('p').map(remove);
 ```

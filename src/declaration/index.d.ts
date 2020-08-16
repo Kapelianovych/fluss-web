@@ -61,18 +61,18 @@ declare module '@fluss/web' {
   /** Removes attribute from element if it has one. */
   export function removeAttribute(element: Element, name: string): void;
 
-  /** 
+  /**
    * Insert _childs_ after last child of _parent_ element.
-   * Strings are are teplaced with `Text` elements. 
+   * Strings are are teplaced with `Text` elements.
    */
   export function append(
     parent: ParentNode,
     ...childs: ReadonlyArray<string | Node>
   ): void;
 
-  /** 
+  /**
    * Insert _childs_ before first child of _parent_ element.
-   * Strings are are teplaced with `Text` elements. 
+   * Strings are are teplaced with `Text` elements.
    */
   export function prepend(
     parent: ParentNode,
@@ -86,5 +86,8 @@ declare module '@fluss/web' {
   export function replace(
     node: ChildNode,
     ...newNodes: ReadonlyArray<string | Node>
-  ): void
+  ): void;
+
+  /** Removes node. */
+  export function remove(node: ChildNode): void;
 }

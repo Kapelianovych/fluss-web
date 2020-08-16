@@ -1,4 +1,5 @@
 export { append } from './append';
+export { remove } from './remove';
 export { prepend } from './prepend';
 export { replace } from './replace';
 export { closest } from './closest';
