@@ -197,10 +197,10 @@ querySelector('p').map((el) => {
 });
 ```
 
-### replace
+### replaceNode
 
 ```typescript
-function replace(
+function replaceNode(
   node: ChildNode,
   ...newNodes: ReadonlyArray<string | Node>
 ): void;
@@ -210,18 +210,30 @@ Replace _node_ with _newNodes_. Strings are replaced with `Text`s.
 
 ```typescript
 querySelector('p').map((el) => {
-  createElement('a').map((a) => replace(el, a));
+  createElement('a').map((a) => replaceNode(el, a));
 });
 ```
 
-### replace
+### removeNode
 
 ```typescript
-export function remove(node: ChildNode): void;
+function removeNode(node: ChildNode): void;
 ```
 
 Removes _node_.
 
 ```typescript
-querySelector('p').map(remove);
+querySelector('p').map(removeNode);
+```
+
+### cloneNode
+
+```typescript
+function cloneNode(node: Node, deep?: boolean): Node;
+```
+
+Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.
+
+```typescript
+querySelector('p').map(cloneNode);
 ```

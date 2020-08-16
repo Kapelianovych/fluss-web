@@ -83,11 +83,17 @@ declare module '@fluss/web' {
    * Replace _node_ with _newNodes_.
    * Strings are replaced with `Text`s.
    */
-  export function replace(
+  export function replaceNode(
     node: ChildNode,
     ...newNodes: ReadonlyArray<string | Node>
   ): void;
 
   /** Removes node. */
-  export function remove(node: ChildNode): void;
+  export function removeNode(node: ChildNode): void;
+
+  /**
+   * Clone node. If _deep_ is `true`, function returns node with all
+   * descendants. By default _deep_ is `false`.
+   */
+  export function cloneNode(node: Node, deep?: boolean): Node;
 }

@@ -2,7 +2,7 @@
 
 ### Added
 
-- `setAttribute`, `getAttribute`, `hasAttribute`, `removeAttribute`, `append`, `prepend`, `replace`, `remove` function.
+- `setAttribute`, `getAttribute`, `hasAttribute`, `removeAttribute`, `append`, `prepend`, `replaceNode`, `removeNode`, `cloneNode` function.
 
 ## [0.1.1] - 2020-08-13
 
