@@ -60,4 +60,13 @@ declare module '@fluss/web' {
 
   /** Removes attribute from element if it has one. */
   export function removeAttribute(element: Element, name: string): void;
+
+  /** 
+   * Insert _childs_ after last child of _parent_ element.
+   * Strings are are teplaced with `Text` elements. 
+   */
+  export function append(
+    parent: ParentNode,
+    ...childs: Array<string | Node>
+  ): void;
 }

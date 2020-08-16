@@ -161,6 +161,20 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
     removeAttribute(el, 'class');
     return el;
   })
-  .map(el => hasAttribute(el, 'class'))
+  .map((el) => hasAttribute(el, 'class'))
   .extract();
+```
+
+### append
+
+```typescript
+function append(parent: ParentNode, ...childs: Array<string | Node>): void;
+```
+
+Insert _childs_ after last child of _parent_ element. Strings are are teplaced with `Text` elements.
+
+```typescript
+querySelector('p').map((el) => {
+  createElement('a').map((a) => append(el, a));
+});
 ```

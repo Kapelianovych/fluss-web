@@ -2,7 +2,7 @@
 
 ### Added
 
-- `setAttribute`, `getAttribute`, `hasAttribute`, `removeAttribute` function.
+- `setAttribute`, `getAttribute`, `hasAttribute`, `removeAttribute`, `append` function.
 
 ## [0.1.1] - 2020-08-13
 
