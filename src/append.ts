@@ -1,6 +1,6 @@
 export function append(
   parent: ParentNode,
-  ...childs: Array<string | Node>
+  ...childs: ReadonlyArray<string | Node>
 ): void {
   parent.append(...childs);
 }

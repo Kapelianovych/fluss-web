@@ -168,7 +168,10 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 ### append
 
 ```typescript
-function append(parent: ParentNode, ...childs: Array<string | Node>): void;
+function append(
+  parent: ParentNode,
+  ...childs: ReadonlyArray<string | Node>
+): void;
 ```
 
 Insert _childs_ after last child of _parent_ element. Strings are are teplaced with `Text` elements.
@@ -182,7 +185,10 @@ querySelector('p').map((el) => {
 ### prepend
 
 ```typescript
-function prepend(parent: ParentNode, ...childs: Array<string | Node>): void;
+function prepend(
+  parent: ParentNode,
+  ...childs: ReadonlyArray<string | Node>
+): void;
 ```
 
 Insert _childs_ before first child of _parent_ element. Strings are are teplaced with `Text` elements.
@@ -190,5 +196,22 @@ Insert _childs_ before first child of _parent_ element. Strings are are teplaced
 ```typescript
 querySelector('p').map((el) => {
   createElement('a').map((a) => prepend(el, a));
+});
+```
+
+### replace
+
+```typescript
+function replace(
+  node: ChildNode,
+  ...newNodes: ReadonlyArray<string | Node>
+): void;
+```
+
+Replace _node_ with _newNodes_. Strings are replaced with `Text`s.
+
+```typescript
+querySelector('p').map((el) => {
+  createElement('a').map((a) => replace(el, a));
 });
 ```

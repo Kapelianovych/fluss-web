@@ -67,7 +67,7 @@ declare module '@fluss/web' {
    */
   export function append(
     parent: ParentNode,
-    ...childs: Array<string | Node>
+    ...childs: ReadonlyArray<string | Node>
   ): void;
 
   /** 
@@ -76,6 +76,15 @@ declare module '@fluss/web' {
    */
   export function prepend(
     parent: ParentNode,
-    ...childs: Array<string | Node>
+    ...childs: ReadonlyArray<string | Node>
   ): void;
+
+  /**
+   * Replace _node_ with _newNodes_.
+   * Strings are replaced with `Text`s.
+   */
+  export function replace(
+    node: ChildNode,
+    ...newNodes: ReadonlyArray<string | Node>
+  ): void
 }

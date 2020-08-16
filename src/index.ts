@@ -1,5 +1,6 @@
 export { append } from './append';
 export { prepend } from './prepend';
+export { replace } from './replace';
 export { closest } from './closest';
 export { setAttribute } from './set_attribute';
 export { getAttribute } from './get_attribute';
