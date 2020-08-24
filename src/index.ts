@@ -13,3 +13,4 @@ export { createTextNode } from './create_text_node';
 export { removeAttribute } from './remove_attribute';
 export { querySelectorAll } from './query_selector_all';
 export { addEventListener } from './add_event_listener';
+export { removeEventListener } from './remove_event_listener';

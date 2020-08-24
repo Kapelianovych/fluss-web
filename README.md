@@ -243,22 +243,7 @@ querySelector('p').map(cloneNode);
 ```typescript
 function addEventListener<E extends EventTarget>(
   element: E,
-  type: E extends SVGElement
-    ? keyof SVGElementEventMap
-    : E extends HTMLElement
-    ?
-        | keyof HTMLElementEventMap
-        | keyof HTMLBodyElementEventMap
-        | keyof HTMLMediaElementEventMap
-        | keyof HTMLMarqueeElementEventMap
-        | keyof HTMLFrameSetElementEventMap
-    : E extends Element
-    ? keyof ElementEventMap
-    : E extends Window
-    ? keyof WindowEventMap
-    : E extends Document
-    ? keyof DocumentEventMap
-    : string,
+  type: AllEventMap<E>,
   listener: EventListener | EventListenerObject,
   options: {
     add?: boolean | AddEventListenerOptions;
@@ -282,4 +267,21 @@ const removeClickOnParagraphListener /*: () => void */ = querySelector<
 >('p')
   .map((p) => addEventListener(p, 'click', console.log))
   .extract();
+```
+
+### removeEventListener
+
+```typescript
+function removeEventListener<E extends EventTarget>(
+  element: E,
+  type: AllEventMap<E>,
+  listener: EventListener | EventListenerObject,
+  options?: boolean | EventListenerOptions
+): void;
+```
+
+Removes the event listener in target's event listener list with the same type, callback, and options.
+
+```typescript
+removeEventListener(someElement, 'click', someListener);
 ```

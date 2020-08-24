@@ -1,3 +1,6 @@
+import { removeEventListener } from './remove_event_listener';
+import type { AllEventMap } from './types';
+
 /**
  * Appends an event listener for events whose type attribute value is type.
  * The listener argument sets the callback that will be invoked when the event is dispatched.
@@ -10,22 +13,7 @@
  */
 export function addEventListener<E extends EventTarget>(
   element: E,
-  type: E extends SVGElement
-    ? keyof SVGElementEventMap
-    : E extends HTMLElement
-    ?
-        | keyof HTMLElementEventMap
-        | keyof HTMLBodyElementEventMap
-        | keyof HTMLMediaElementEventMap
-        | keyof HTMLMarqueeElementEventMap
-        | keyof HTMLFrameSetElementEventMap
-    : E extends Element
-    ? keyof ElementEventMap
-    : E extends Window
-    ? keyof WindowEventMap
-    : E extends Document
-    ? keyof DocumentEventMap
-    : string,
+  type: AllEventMap<E>,
   listener: EventListener | EventListenerObject,
   options: {
     add?: boolean | AddEventListenerOptions;
@@ -33,5 +21,5 @@ export function addEventListener<E extends EventTarget>(
   } = {}
 ): () => void {
   element.addEventListener(type, listener, options.add);
-  return () => element.removeEventListener(type, listener, options.remove);
+  return () => removeEventListener(element, type, listener, options.remove);
 }

@@ -1,6 +1,26 @@
 import { Maybe, Wrapper } from '@fluss/core';
 
 /**
+ * List of all events names.
+ */
+export type AllEventMap<E> = E extends SVGElement
+  ? keyof SVGElementEventMap
+  : E extends HTMLElement
+  ?
+      | keyof HTMLElementEventMap
+      | keyof HTMLBodyElementEventMap
+      | keyof HTMLMediaElementEventMap
+      | keyof HTMLMarqueeElementEventMap
+      | keyof HTMLFrameSetElementEventMap
+  : E extends Element
+  ? keyof ElementEventMap
+  : E extends Window
+  ? keyof WindowEventMap
+  : E extends Document
+  ? keyof DocumentEventMap
+  : string;
+
+/**
  * Select element from parent node. By default selects from **document**.
  * Safe variant of `document.querySelector` method.
  */
@@ -108,25 +128,20 @@ export function cloneNode(node: Node, deep?: boolean): Node;
  */
 export function addEventListener<E extends EventTarget>(
   element: E,
-  type: E extends SVGElement
-    ? keyof SVGElementEventMap
-    : E extends HTMLElement
-    ?
-        | keyof HTMLElementEventMap
-        | keyof HTMLBodyElementEventMap
-        | keyof HTMLMediaElementEventMap
-        | keyof HTMLMarqueeElementEventMap
-        | keyof HTMLFrameSetElementEventMap
-    : E extends Element
-    ? keyof ElementEventMap
-    : E extends Window
-    ? keyof WindowEventMap
-    : E extends Document
-    ? keyof DocumentEventMap
-    : string,
+  type: AllEventMap<E>,
   listener: EventListener | EventListenerObject,
   options?: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   }
 ): () => void;
+
+/**
+ * Removes the event listener in target's event listener list with the same type, callback, and options.
+ */
+export function removeEventListener<E extends EventTarget>(
+  element: E,
+  type: AllEventMap<E>,
+  listener: EventListener | EventListenerObject,
+  options?: boolean | EventListenerOptions
+): void;
