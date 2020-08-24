@@ -8,6 +8,7 @@ export { setAttribute } from './set_attribute';
 export { getAttribute } from './get_attribute';
 export { hasAttribute } from './has_attribute';
 export { querySelector } from './query_selector';
+export { dispatchEvent } from './dispatch_event';
 export { createElement } from './create_element';
 export { createTextNode } from './create_text_node';
 export { removeAttribute } from './remove_attribute';

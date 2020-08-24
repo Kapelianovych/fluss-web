@@ -285,3 +285,18 @@ Removes the event listener in target's event listener list with the same type, c
 ```typescript
 removeEventListener(someElement, 'click', someListener);
 ```
+
+### dispatchEvent
+
+```typescript
+function dispatchEvent<E extends EventTarget>(
+  element: E,
+  event: Event
+): boolean;
+```
+
+Dispatches a synthetic event event to element and returns true if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.
+
+```typescript
+dispatchEvent(someElement, new Event('click'));
+```
