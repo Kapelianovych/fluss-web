@@ -7,7 +7,9 @@ describe('removeEventListener', () => {
     let event: Event | null = null;
 
     querySelector<HTMLParagraphElement>('p').map((p) => {
-      const listener = (e: Event) => (event = e);
+      const listener = (e: MouseEvent) => {
+        event = e;
+      };
 
       p.addEventListener('click', listener);
       removeEventListener(p, 'click', listener);
