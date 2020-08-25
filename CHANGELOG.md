@@ -1,4 +1,10 @@
-# [0.3.1] - 2020-08-25
+# [0.3.2] - 2020-08-25
+
+### Fixed
+
+- Fixed type of _listener_ in `addEventListener` and `removeEventListener` functions.
+
+## [0.3.1] - 2020-08-25
 
 ### Added
 

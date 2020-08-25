@@ -19,3 +19,16 @@ export type EventMapOf<E> = E extends SVGElement
   : { [key: string]: Event };
 
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
+
+export type EventListener<E, T extends keyof EventMapOf<E>> = (
+  event: EventOf<E, T>
+) => void;
+
+export type EventListenerObject<E, T extends keyof EventMapOf<E>> = {
+  handleEvent: (event: EventOf<E, T>) => void;
+};
+
+export type EventListenerOrEventListenerObject<
+  E,
+  T extends keyof EventMapOf<E>
+> = EventListener<E, T> | EventListenerObject<E, T>;

@@ -1,6 +1,6 @@
 {
   "name": "@fluss/web",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Functions for functional programming in browser.",
   "keywords": [
     "functional web",
@@ -13,7 +13,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "scripts": {
-    "clean": "rm -r dist/*",
+    "clean": "mkdir -p dist; rm -r dist/*",
     "build": "npm run test; npm run clean; rollup -c; npm run copy",
     "copy": "npm run copy:settings; npm run copy:docs; npm run copy:declaration; npm run copy:license",
     "copy:settings": "cp package.json dist/",

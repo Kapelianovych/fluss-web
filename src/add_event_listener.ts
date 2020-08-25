@@ -1,5 +1,5 @@
 import { removeEventListener } from './remove_event_listener';
-import type { EventMapOf, EventOf } from './types';
+import type { EventMapOf, EventListenerOrEventListenerObject } from './types';
 
 /**
  * Appends an event listener for events whose type attribute value is type.
@@ -17,9 +17,7 @@ export function addEventListener<
 >(
   element: E,
   type: T,
-  listener: (
-    event: EventOf<E, T>
-  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
+  listener: EventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -28,7 +26,7 @@ export function addEventListener<
   // @ts-ignore
   // keyof returns string | number | symbol type, which is not
   // exists in EventMapOf<E> type. TypeScript possibly cannot narrow type here.
-  // Also EventListenerOrEventListenerObject cannot narrow event type :(
+  // Also TypeScript's EventListenerOrEventListenerObject cannot narrow event type :(
   element.addEventListener(type, listener, options.add);
   return () => removeEventListener(element, type, listener, options.remove);
 }

@@ -244,9 +244,7 @@ querySelector('p').map(cloneNode);
 function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
   element: E,
   type: T,
-  listener: (
-    event: EventOf<E, T>
-  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
+  listener: EventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -280,9 +278,7 @@ function removeEventListener<
 >(
   element: E,
   type: T,
-  listener: (
-    event: EventOf<E, T>
-  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
+  listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
 ): void;
 ```

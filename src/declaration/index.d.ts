@@ -20,8 +20,21 @@ export type EventMapOf<E> = E extends SVGElement
   ? DocumentEventMap
   : { [key: string]: Event };
 
-/** Gets event type based on element and event type. */
+/** Gets event based on element and event type. */
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
+
+export type EventListener<E, T extends keyof EventMapOf<E>> = (
+  event: EventOf<E, T>
+) => void;
+
+export type EventListenerObject<E, T extends keyof EventMapOf<E>> = {
+  handleEvent: (event: EventOf<E, T>) => void;
+};
+
+export type EventListenerOrEventListenerObject<
+  E,
+  T extends keyof EventMapOf<E>
+> = EventListener<E, T> | EventListenerObject<E, T>;
 
 /**
  * Select element from parent node. By default selects from **document**.
@@ -135,9 +148,7 @@ export function addEventListener<
 >(
   element: E,
   type: T,
-  listener: (
-    event: EventOf<E, T>
-  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
+  listener: EventListenerOrEventListenerObject<E, T>,
   options?: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -153,9 +164,7 @@ export function removeEventListener<
 >(
   element: E,
   type: T,
-  listener: (
-    event: EventOf<E, T>
-  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
+  listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
 ): void;
 
