@@ -1,24 +1,27 @@
 import { Maybe, Wrapper } from '@fluss/core';
 
 /**
- * List of all events names.
+ * List of all maps of event name and listeners.
  */
-export type AllEventMap<E> = E extends SVGElement
-  ? keyof SVGElementEventMap
+export type EventMapOf<E> = E extends SVGElement
+  ? SVGElementEventMap
   : E extends HTMLElement
   ?
-      | keyof HTMLElementEventMap
-      | keyof HTMLBodyElementEventMap
-      | keyof HTMLMediaElementEventMap
-      | keyof HTMLMarqueeElementEventMap
-      | keyof HTMLFrameSetElementEventMap
+      | HTMLElementEventMap
+      | HTMLBodyElementEventMap
+      | HTMLMediaElementEventMap
+      | HTMLMarqueeElementEventMap
+      | HTMLFrameSetElementEventMap
   : E extends Element
-  ? keyof ElementEventMap
+  ? ElementEventMap
   : E extends Window
-  ? keyof WindowEventMap
+  ? WindowEventMap
   : E extends Document
-  ? keyof DocumentEventMap
-  : string;
+  ? DocumentEventMap
+  : { [key: string]: Event };
+
+/** Gets event type based on element and event type. */
+export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
 
 /**
  * Select element from parent node. By default selects from **document**.
@@ -126,10 +129,15 @@ export function cloneNode(node: Node, deep?: boolean): Node;
  * Returns function that removes `listener` from `element`s
  * event listener list with same `type` and options.
  */
-export function addEventListener<E extends EventTarget>(
+export function addEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
   element: E,
-  type: AllEventMap<E>,
-  listener: EventListener | EventListenerObject,
+  type: T,
+  listener: (
+    event: EventOf<E, T>
+  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
   options?: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -139,10 +147,15 @@ export function addEventListener<E extends EventTarget>(
 /**
  * Removes the event listener in target's event listener list with the same type, callback, and options.
  */
-export function removeEventListener<E extends EventTarget>(
+export function removeEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
   element: E,
-  type: AllEventMap<E>,
-  listener: EventListener | EventListenerObject,
+  type: T,
+  listener: (
+    event: EventOf<E, T>
+  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
   options?: boolean | EventListenerOptions
 ): void;
 

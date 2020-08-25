@@ -25,10 +25,10 @@ describe('addEventListener', () => {
   test('addEventListener returns function that remove previously added listener', () => {
     let event: Event | null = null;
 
-    querySelector('.second').map((element) => {
+    querySelector<HTMLDivElement>('.second').map((element) => {
       const removeFullScreenChangeListener = addEventListener(
         element,
-        'fullscreenchange',
+        'animationcancel',
         (evt) => {
           event = evt;
         }

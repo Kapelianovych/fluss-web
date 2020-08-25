@@ -241,10 +241,12 @@ querySelector('p').map(cloneNode);
 ### addEventListener
 
 ```typescript
-function addEventListener<E extends EventTarget>(
+function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
   element: E,
-  type: AllEventMap<E>,
-  listener: EventListener | EventListenerObject,
+  type: T,
+  listener: (
+    event: EventOf<E, T>
+  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -272,10 +274,15 @@ const removeClickOnParagraphListener /*: () => void */ = querySelector<
 ### removeEventListener
 
 ```typescript
-function removeEventListener<E extends EventTarget>(
+function removeEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
   element: E,
-  type: AllEventMap<E>,
-  listener: EventListener | EventListenerObject,
+  type: T,
+  listener: (
+    event: EventOf<E, T>
+  ) => void | { handleEvent: (event: EventOf<E, T>) => void },
   options?: boolean | EventListenerOptions
 ): void;
 ```

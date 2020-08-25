@@ -1,19 +1,21 @@
 /**
- * List of all events names.
+ * List of all maps of event name and listeners.
  */
-export type AllEventMap<E> = E extends SVGElement
-  ? keyof SVGElementEventMap
+export type EventMapOf<E> = E extends SVGElement
+  ? SVGElementEventMap
   : E extends HTMLElement
   ?
-      | keyof HTMLElementEventMap
-      | keyof HTMLBodyElementEventMap
-      | keyof HTMLMediaElementEventMap
-      | keyof HTMLMarqueeElementEventMap
-      | keyof HTMLFrameSetElementEventMap
+      | HTMLElementEventMap
+      | HTMLBodyElementEventMap
+      | HTMLMediaElementEventMap
+      | HTMLMarqueeElementEventMap
+      | HTMLFrameSetElementEventMap
   : E extends Element
-  ? keyof ElementEventMap
+  ? ElementEventMap
   : E extends Window
-  ? keyof WindowEventMap
+  ? WindowEventMap
   : E extends Document
-  ? keyof DocumentEventMap
-  : string;
+  ? DocumentEventMap
+  : { [key: string]: Event };
+
+export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
