@@ -100,7 +100,7 @@ export function removeAttribute(element: Element, name: string): void;
  * Insert _childs_ after last child of _parent_ element.
  * Strings are are teplaced with `Text` elements.
  */
-export function append(
+export function appendNodes(
   parent: ParentNode,
   ...childs: ReadonlyArray<string | Node>
 ): void;
@@ -109,7 +109,7 @@ export function append(
  * Insert _childs_ before first child of _parent_ element.
  * Strings are are teplaced with `Text` elements.
  */
-export function prepend(
+export function prependNodes(
   parent: ParentNode,
   ...childs: ReadonlyArray<string | Node>
 ): void;

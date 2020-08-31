@@ -1,6 +1,6 @@
 {
   "name": "@fluss/web",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Functions for functional programming in browser.",
   "keywords": [
     "functional web",
@@ -13,14 +13,14 @@
   "main": "index.js",
   "module": "index.mjs",
   "scripts": {
-    "clean": "mkdir -p dist; rm -r dist/*",
+    "clean": "mkdir -p build; rm -r build/*",
     "build": "npm run test; npm run clean; rollup -c; npm run copy",
     "copy": "npm run copy:settings; npm run copy:docs; npm run copy:declaration; npm run copy:license",
-    "copy:settings": "cp package.json dist/",
-    "copy:license": "cp LICENSE dist/",
-    "copy:docs": "cp README.md dist/; cp CHANGELOG.md dist/",
-    "copy:declaration": "cp -r src/declaration/ dist/",
-    "release": "npm run build; npm publish dist/ --access public",
+    "copy:settings": "cp package.json build/",
+    "copy:license": "cp LICENSE build/",
+    "copy:docs": "cp README.md build/; cp CHANGELOG.md build/",
+    "copy:declaration": "cp -r src/declaration/ build/",
+    "release": "npm run build; npm publish build/ --access public",
     "test": "jest"
   },
   "author": "Kapelianovych Yevhen",

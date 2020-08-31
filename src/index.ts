@@ -1,9 +1,9 @@
-export { append } from './append';
-export { prepend } from './prepend';
 export { closest } from './closest';
 export { cloneNode } from './clone_node';
 export { removeNode } from './remove_node';
+export { appendNodes } from './append_nodes';
 export { replaceNode } from './replace_node';
+export { prependNodes } from './prepend_nodes';
 export { setAttribute } from './set_attribute';
 export { getAttribute } from './get_attribute';
 export { hasAttribute } from './has_attribute';

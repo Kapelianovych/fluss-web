@@ -1,4 +1,11 @@
-# [0.3.2] - 2020-08-25
+# [0.4.0] - 2020-08-31
+
+### Changed
+
+- `append` renamed to `appendNodes`.
+- `prepend` renamed to `prependNodes`.
+
+## [0.3.2] - 2020-08-25
 
 ### Fixed
 

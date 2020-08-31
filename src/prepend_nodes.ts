@@ -1,6 +1,6 @@
-export function append(
+export function prependNodes(
   parent: ParentNode,
   ...childs: ReadonlyArray<string | Node>
 ): void {
-  parent.append(...childs);
+  parent.prepend(...childs);
 }
