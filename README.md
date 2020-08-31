@@ -168,7 +168,7 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 ```typescript
 function appendNodes(
   parent: ParentNode,
-  ...childs: ReadonlyArray<string | Node>
+  ...children: ReadonlyArray<string | Node>
 ): void;
 ```
 
@@ -185,7 +185,7 @@ querySelector('p').map((el) => {
 ```typescript
 function prependNodes(
   parent: ParentNode,
-  ...childs: ReadonlyArray<string | Node>
+  ...children: ReadonlyArray<string | Node>
 ): void;
 ```
 

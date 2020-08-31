@@ -102,7 +102,7 @@ export function removeAttribute(element: Element, name: string): void;
  */
 export function appendNodes(
   parent: ParentNode,
-  ...childs: ReadonlyArray<string | Node>
+  ...children: ReadonlyArray<string | Node>
 ): void;
 
 /**
@@ -111,7 +111,7 @@ export function appendNodes(
  */
 export function prependNodes(
   parent: ParentNode,
-  ...childs: ReadonlyArray<string | Node>
+  ...children: ReadonlyArray<string | Node>
 ): void;
 
 /**
