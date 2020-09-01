@@ -163,6 +163,24 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
   .extract();
 ```
 
+### toggleAttribute
+
+```typescript
+function toggleAttribute(
+  element: Element,
+  name: string,
+  force?: boolean
+): boolean;
+```
+
+Toggles a `Boolean attribute` (removing it if it is present and adding it if it is not present) on the given element.
+
+```typescript
+const hasElementAttribute /*: boolean */ = querySelector('input')
+  .map((el) => toogleAttribute(el, 'readonly'))
+  .extract();
+```
+
 ### appendNodes
 
 ```typescript
