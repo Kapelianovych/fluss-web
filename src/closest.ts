@@ -1,6 +1,6 @@
 import { maybeOf, Maybe } from "@fluss/core";
 
-export function closest<T extends Element = Element>(
+export function closest<T extends Element>(
   selector: string,
   child: Element
 ): Maybe<T> {

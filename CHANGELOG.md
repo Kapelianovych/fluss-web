@@ -3,6 +3,11 @@
 ### Added
 
 - `toggleAttribute` function.
+- Names of possible attribute names to each HTML element.
+
+### Changed
+
+- Remove default type for element in `querySelector`, `querySelectorAll` and `closest` functions.
 
 ## [0.4.0] - 2020-08-31
 

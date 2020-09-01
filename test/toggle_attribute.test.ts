@@ -6,7 +6,7 @@ describe('toggleAttribute', () => {
   });
 
   test('toggleAttribute toggles readonly attribute', () => {
-    querySelector('input').map((input) => {
+    querySelector<HTMLInputElement>('input').map((input) => {
       toggleAttribute(input, 'readonly');
       expect(getAttribute(input, 'readonly').isJust()).toBe(true);
 
@@ -16,7 +16,7 @@ describe('toggleAttribute', () => {
   });
 
   test('toggleAttribute with "force" causes to adding or removing attribute', () => {
-    querySelector('input').map((input) => {
+    querySelector<HTMLInputElement>('input').map((input) => {
       toggleAttribute(input, 'readonly', false);
       expect(getAttribute(input, 'readonly').isJust()).toBe(false);
 

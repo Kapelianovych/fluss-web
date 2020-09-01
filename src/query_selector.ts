@@ -1,6 +1,6 @@
 import { maybeOf, Maybe } from '@fluss/core';
 
-export function querySelector<T extends Element = Element>(
+export function querySelector<T extends Element>(
   selector: string,
   parent: ParentNode = document
 ): Maybe<T> {

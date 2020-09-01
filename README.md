@@ -1,11 +1,11 @@
 # @fluss/web - make Web more functional and safe
 
-`@fluss/web` - small library that contains couple functions for interacting with DOM in safe functional way.
+`@fluss/web` - small library that contains couple functions for interacting with DOM in safe and functional way.
 
 ## Example use
 
 ```typescript
-const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return null if element doesn't exist on the page.
+const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return "null" if element doesn't exist on the page.
 ```
 
 ## @fluss/web's advantages
@@ -14,7 +14,11 @@ const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is w
 
 TypeScript definitions are included in the library.
 
+Functions that deals with attributes (`getAttribute`, `setAttribute`, `hasAttribute`, `removeAttribute` and `toggleAttribute`) do not allow to set to element attribute, that do nothing for it. Each attribute is restricted to some HTML element(s), so it is reasonable to check such restriction. [More about which attribute belongs to which element is at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes).
+
 - Small size
+
+Every function is created as small as possible.
 
 # Install
 
@@ -29,7 +33,7 @@ npm i @fluss/web
 ### querySelector
 
 ```typescript
-function querySelector<T extends Element = Element>(
+function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode
 ): Maybe<T>;
@@ -45,7 +49,7 @@ const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same);
 ### querySelectorAll
 
 ```typescript
-function querySelectorAll<T extends Element = Element>(
+function querySelectorAll<T extends Element>(
   selector: string,
   parent?: ParentNode
 ): ReadonlyArray<T>;
@@ -66,10 +70,7 @@ const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
 ### closest
 
 ```typescript
-function closest<T extends Element = Element>(
-  selector: string,
-  child: Element
-): Maybe<T>;
+function closest<T extends Element>(selector: string, child: Element): Maybe<T>;
 ```
 
 Find closest ancestor that match selector.
@@ -108,7 +109,11 @@ const textElement /*: Wrapper<Text> */ = createTextNode('Yay!');
 ### setAttribute
 
 ```typescript
-function setAttribute(element: Element, key: string, value: string): void;
+function setAttribute<E extends Element>(
+  element: E,
+  key: AttributeNamesOf<E> | GlobalAttributeNames,
+  value: string
+): void;
 ```
 
 Set attribute for element.
@@ -120,7 +125,10 @@ querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 ### getAttribute
 
 ```typescript
-function getAttribute(element: Element, name: string): Maybe<string>;
+function getAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): Maybe<string>;
 ```
 
 Gets attribute value of element.
@@ -134,7 +142,10 @@ const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
 ### hasAttribute
 
 ```typescript
-function hasAttribute(element: Element, name: string): boolean;
+function hasAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): boolean;
 ```
 
 Checks if element has attribute.
@@ -148,7 +159,10 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 ### removeAttribute
 
 ```typescript
-function removeAttribute(element: Element, name: string): void;
+function removeAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): void;
 ```
 
 Removes attribute from element if it has one.
@@ -166,9 +180,9 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 ### toggleAttribute
 
 ```typescript
-function toggleAttribute(
-  element: Element,
-  name: string,
+function toggleAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames,
   force?: boolean
 ): boolean;
 ```

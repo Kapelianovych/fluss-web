@@ -37,10 +37,379 @@ export type EventListenerOrEventListenerObject<
 > = EventListener<E, T> | EventListenerObject<E, T>;
 
 /**
+ * Global attributes are attributes common to all HTML elements;
+ * they can be used on all elements, though they may have no effect on some elements.
+ */
+export type GlobalAttributeNames =
+  | 'accesskey'
+  | 'autocapitalize'
+  | 'class'
+  | 'contenteditable'
+  | 'dir'
+  | 'draggable'
+  | 'exportparts'
+  | 'hidden'
+  | 'id'
+  | 'inputmode'
+  | 'is'
+  | 'itemid'
+  | 'itemprop'
+  | 'itemref'
+  | 'itemscope'
+  | 'itemtype'
+  | 'lang'
+  | 'part'
+  | 'slot'
+  | 'spellcheck'
+  | 'style'
+  | 'tabindex'
+  | 'title'
+  | 'translate';
+
+export type FormAttributeNames =
+  | 'accept'
+  | 'accept-charset'
+  | 'action'
+  | 'autocomplete'
+  | 'enctype'
+  | 'method'
+  | 'name'
+  | 'novalidate'
+  | 'target';
+export type InputAttributeNames =
+  | 'accept'
+  | 'alt'
+  | 'autocomplete'
+  | 'autofocus'
+  | 'capture'
+  | 'checked'
+  | 'dirname'
+  | 'disabled'
+  | 'form'
+  | 'formaction'
+  | 'formenctype'
+  | 'formmethod'
+  | 'formnovalidate'
+  | 'formtarget'
+  | 'height'
+  | 'list'
+  | 'max'
+  | 'maxlength'
+  | 'minlength'
+  | 'min'
+  | 'name'
+  | 'pattern'
+  | 'placeholder'
+  | 'readonly'
+  | 'required'
+  | 'size'
+  | 'src'
+  | 'step'
+  | 'type'
+  | 'usemap'
+  | 'value'
+  | 'width';
+export type AppletAttributeNames = 'align' | 'alt' | 'code' | 'codebase';
+export type CaptionAttributeNames = 'align';
+export type ColAttributeNames = 'align' | 'span';
+export type ColGroupAttributeNames = 'align' | 'span';
+export type HrAttributeNames = 'align';
+export type IFrameAttributeNames =
+  | 'align'
+  | 'allow'
+  | 'csp'
+  | 'height'
+  | 'importance'
+  | 'loading'
+  | 'name'
+  | 'referrerpolicy'
+  | 'sandbox'
+  | 'src'
+  | 'srcdoc'
+  | 'width';
+export type ImgAttributeNames =
+  | 'align'
+  | 'alt'
+  | 'crossorigin'
+  | 'decoding'
+  | 'height'
+  | 'importance'
+  | 'ismap'
+  | 'loading'
+  | 'referrerpolicy'
+  | 'sizes'
+  | 'src'
+  | 'srcset'
+  | 'usemap'
+  | 'width';
+export type TableAttributeNames = 'align' | 'summary';
+export type TBodyAttributeNames = 'align';
+export type TdAttributeNames = 'align' | 'colspan' | 'headers' | 'rowspan';
+export type TFootAttributeNames = 'align';
+export type ThAttributeNames =
+  | 'align'
+  | 'colspan'
+  | 'headers'
+  | 'rowspan'
+  | 'scope';
+export type THeadAttributeNames = 'align';
+export type TrAttributeNames = 'align';
+export type AreaAttributeNames =
+  | 'alt'
+  | 'coords'
+  | 'download'
+  | 'href'
+  | 'hreflang'
+  | 'media'
+  | 'ping'
+  | 'referrerpolicy'
+  | 'rel'
+  | 'shape'
+  | 'target';
+export type ScriptAttributeNames =
+  | 'async'
+  | 'charset'
+  | 'crossorigin'
+  | 'defer'
+  | 'importance'
+  | 'integrity'
+  | 'language'
+  | 'referrerpolicy'
+  | 'src'
+  | 'type';
+export type SelectAttributeNames =
+  | 'autocomplete'
+  | 'autofocus'
+  | 'disabled'
+  | 'form'
+  | 'multiple'
+  | 'name'
+  | 'required'
+  | 'size';
+export type TextAreaAttributeNames =
+  | 'autocomplete'
+  | 'autofocus'
+  | 'cols'
+  | 'dirname'
+  | 'disabled'
+  | 'enterkeyhint'
+  | 'form'
+  | 'inputmode'
+  | 'maxlength'
+  | 'minlength'
+  | 'name'
+  | 'placeholder'
+  | 'readonly'
+  | 'required'
+  | 'rows'
+  | 'wrap';
+export type ButtonAttributeNames =
+  | 'autofocus'
+  | 'disabled'
+  | 'form'
+  | 'formaction'
+  | 'formenctype'
+  | 'formmethod'
+  | 'formnovalidate'
+  | 'formtarget'
+  | 'name'
+  | 'type'
+  | 'value';
+export type AudioAttributeNames =
+  | 'autoplay'
+  | 'buffered'
+  | 'controls'
+  | 'crossorigin'
+  | 'loop'
+  | 'muted'
+  | 'preload'
+  | 'src';
+export type VideoAttributeNames =
+  | 'autoplay'
+  | 'buffered'
+  | 'controls'
+  | 'crossorigin'
+  | 'height'
+  | 'loop'
+  | 'muted'
+  | 'poster'
+  | 'preload'
+  | 'src'
+  | 'width';
+export type MetaAttributeNames = 'charset' | 'content' | 'http-equiv' | 'name';
+export type BlockQuoteAttributeNames = 'cite';
+export type DelAttributeNames = 'cite' | 'datetime';
+export type InsAttributeNames = 'cite' | 'datetime';
+export type QAttributeNames = 'cite';
+export type LinkAttributeNames =
+  | 'crossorigin'
+  | 'href'
+  | 'hreflang'
+  | 'importance'
+  | 'integrity'
+  | 'media'
+  | 'referrerpolicy'
+  | 'rel'
+  | 'sizes';
+export type ObjectAttributeNames =
+  | 'data'
+  | 'form'
+  | 'height'
+  | 'name'
+  | 'type'
+  | 'usemap'
+  | 'width';
+export type TimeAttributeNames = 'datetime';
+export type TrackAttributeNames =
+  | 'default'
+  | 'kind'
+  | 'label'
+  | 'src'
+  | 'srclang';
+export type FieldSetAttributeNames = 'disabled' | 'form' | 'name';
+export type OptGroupAttributeNames = 'disabled' | 'label';
+export type OptionAttributeNames = 'disabled' | 'label' | 'selected' | 'value';
+export type AnchorAttributeNames =
+  | 'download'
+  | 'href'
+  | 'hreflang'
+  | 'media'
+  | 'ping'
+  | 'referrerpolicy'
+  | 'rel'
+  | 'shape'
+  | 'target';
+export type LabelAttributeNames = 'for' | 'form';
+export type OutputAttributeNames = 'for' | 'form' | 'name';
+export type MeterAttributeNames =
+  | 'form'
+  | 'high'
+  | 'low'
+  | 'max'
+  | 'min'
+  | 'optimum'
+  | 'value';
+export type ProgressAttributeNames = 'form' | 'max' | 'value';
+export type CanvasAttributeNames = 'height' | 'width';
+export type EmbedAttributeNames = 'height' | 'src' | 'type' | 'width';
+export type BaseAttributeNames = 'href' | 'target';
+export type SourceAttributeNames =
+  | 'media'
+  | 'sizes'
+  | 'src'
+  | 'srcset'
+  | 'type';
+export type StyleAttributeNames = 'media' | 'scoped' | 'type';
+export type MapAttributeNames = 'name';
+export type ParamAttributeNames = 'name' | 'value';
+export type DetailsAttributeNames = 'open';
+export type OlAttributeNames = 'reversed' | 'start';
+export type MenuAttributeNames = 'type';
+export type DataAttributeNames = 'value';
+export type LiAttributeNames = 'value';
+
+/** Gets attribute names that can be used in element. */
+export type AttributeNamesOf<E extends Element> = E extends HTMLFormElement
+  ? FormAttributeNames
+  : E extends HTMLInputElement
+  ? InputAttributeNames
+  : E extends HTMLAppletElement
+  ? AppletAttributeNames
+  : E extends HTMLTableCaptionElement
+  ? CaptionAttributeNames
+  : E extends HTMLTableColElement
+  ? ColGroupAttributeNames | ColAttributeNames
+  : E extends HTMLHRElement
+  ? HrAttributeNames
+  : E extends HTMLIFrameElement
+  ? IFrameAttributeNames
+  : E extends HTMLImageElement
+  ? ImgAttributeNames
+  : E extends HTMLTableElement
+  ? TableAttributeNames
+  : E extends HTMLTableSectionElement
+  ? TBodyAttributeNames | TFootAttributeNames | THeadAttributeNames
+  : E extends HTMLTableCellElement
+  ? TdAttributeNames
+  : E extends HTMLTableHeaderCellElement
+  ? ThAttributeNames
+  : E extends HTMLTableRowElement
+  ? TrAttributeNames
+  : E extends HTMLAreaElement
+  ? AreaAttributeNames
+  : E extends HTMLScriptElement
+  ? ScriptAttributeNames
+  : E extends HTMLSelectElement
+  ? SelectAttributeNames
+  : E extends HTMLTextAreaElement
+  ? TextAreaAttributeNames
+  : E extends HTMLButtonElement
+  ? ButtonAttributeNames
+  : E extends HTMLAudioElement
+  ? AudioAttributeNames
+  : E extends HTMLVideoElement
+  ? VideoAttributeNames
+  : E extends HTMLMetaElement
+  ? MetaAttributeNames
+  : E extends HTMLQuoteElement
+  ? BlockQuoteAttributeNames | QAttributeNames
+  : E extends HTMLModElement
+  ? DelAttributeNames | InsAttributeNames
+  : E extends HTMLLinkElement
+  ? LinkAttributeNames
+  : E extends HTMLObjectElement
+  ? ObjectAttributeNames
+  : E extends HTMLTimeElement
+  ? TimeAttributeNames
+  : E extends HTMLTrackElement
+  ? TrackAttributeNames
+  : E extends HTMLFieldSetElement
+  ? FieldSetAttributeNames
+  : E extends HTMLOptGroupElement
+  ? OptGroupAttributeNames
+  : E extends HTMLOptionElement
+  ? OptionAttributeNames
+  : E extends HTMLAnchorElement
+  ? AnchorAttributeNames
+  : E extends HTMLLabelElement
+  ? LabelAttributeNames
+  : E extends HTMLOutputElement
+  ? OutputAttributeNames
+  : E extends HTMLMeterElement
+  ? MeterAttributeNames
+  : E extends HTMLProgressElement
+  ? ProgressAttributeNames
+  : E extends HTMLCanvasElement
+  ? CanvasAttributeNames
+  : E extends HTMLEmbedElement
+  ? EmbedAttributeNames
+  : E extends HTMLBaseElement
+  ? BaseAttributeNames
+  : E extends HTMLSourceElement
+  ? SourceAttributeNames
+  : E extends HTMLStyleElement
+  ? StyleAttributeNames
+  : E extends HTMLMapElement
+  ? MapAttributeNames
+  : E extends HTMLParamElement
+  ? ParamAttributeNames
+  : E extends HTMLDetailsElement
+  ? DetailsAttributeNames
+  : E extends HTMLOListElement
+  ? OlAttributeNames
+  : E extends HTMLMenuElement
+  ? MenuAttributeNames
+  : E extends HTMLDataElement
+  ? DataAttributeNames
+  : E extends HTMLLIElement
+  ? LiAttributeNames
+  : GlobalAttributeNames;
+
+/**
  * Select element from parent node. By default selects from **document**.
  * Safe variant of `document.querySelector` method.
  */
-export function querySelector<T extends Element = Element>(
+export function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode
 ): Maybe<T>;
@@ -49,7 +418,7 @@ export function querySelector<T extends Element = Element>(
  * Select elements from parent node. By default selects from **document**.
  * Functional variant of `document.querySelectorAll` method.
  */
-export function querySelectorAll<T extends Element = Element>(
+export function querySelectorAll<T extends Element>(
   selector: string,
   parent?: ParentNode
 ): ReadonlyArray<T>;
@@ -58,7 +427,7 @@ export function querySelectorAll<T extends Element = Element>(
  * Gets parent element of child element.
  * Safe variant of `child.closest` method.
  */
-export function closest<T extends Element = Element>(
+export function closest<T extends Element>(
   selector: string,
   child: Element
 ): Maybe<T>;
@@ -79,22 +448,31 @@ export function createElement<T extends keyof HTMLElementTagNameMap>(
 export function createTextNode(data: string): Wrapper<Text>;
 
 /** Set attribute for element. */
-export function setAttribute(
-  element: Element,
-  key: string,
+export function setAttribute<E extends Element>(
+  element: E,
+  key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
 
 /**
  * Get attribute value of element.
  */
-export function getAttribute(element: Element, name: string): Maybe<string>;
+export function getAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): Maybe<string>;
 
 /** Checks if element has attribute. */
-export function hasAttribute(element: Element, name: string): boolean;
+export function hasAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): boolean;
 
 /** Removes attribute from element if it has one. */
-export function removeAttribute(element: Element, name: string): void;
+export function removeAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames
+): void;
 
 /**
  * Insert _childs_ after last child of _parent_ element.
@@ -188,8 +566,8 @@ export function dispatchEvent<E extends EventTarget>(
  *
  * Returns `true` if _name_ is now present, and `false` otherwise.
  */
-export function toggleAttribute(
-  element: Element,
-  name: string,
+export function toggleAttribute<E extends Element>(
+  element: E,
+  name: AttributeNamesOf<E> | GlobalAttributeNames,
   force?: boolean
 ): boolean;
