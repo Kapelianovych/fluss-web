@@ -1,9 +1,10 @@
-import { AttributeNamesOf, GlobalAttributeNames } from './types';
+import { Maybe, maybeOf } from '@fluss/core';
+import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
 export function setAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void {
-  element.setAttribute(key, value);
+  maybeOf(element).map((el) => el.setAttribute(key, value));
 }

@@ -1,6 +1,4 @@
-/**
- * List of all maps of event name and listeners.
- */
+/** List of all maps of event name and listeners. */
 export type EventMapOf<E> = E extends SVGElement
   ? SVGElementEventMap
   : E extends HTMLElement

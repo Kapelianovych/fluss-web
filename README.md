@@ -8,6 +8,15 @@
 const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return "null" if element doesn't exist on the page.
 ```
 
+## Design goals
+
+- Manual annotation should never be required, TypeScript should infer everything by self.
+- The implementation of each function should be as minimal as possible.
+- All functions are immutable, and there are no side-effects.
+- All functions must be safe as much as possible.
+- Fixed number of arguments (preferably 3) whenever possible.
+- Do not override native methods, if they are already safe.
+
 ## @fluss/web's advantages
 
 - TypeScript included
@@ -35,7 +44,7 @@ npm i @fluss/web
 ```typescript
 function querySelector<T extends Element>(
   selector: string,
-  parent?: ParentNode
+  parent?: ParentNode | Maybe<ParentNode>
 ): Maybe<T>;
 ```
 
@@ -51,7 +60,7 @@ const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same);
 ```typescript
 function querySelectorAll<T extends Element>(
   selector: string,
-  parent?: ParentNode
+  parent?: ParentNode | Maybe<ParentNode>
 ): ReadonlyArray<T>;
 ```
 
@@ -70,7 +79,10 @@ const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
 ### closest
 
 ```typescript
-function closest<T extends Element>(selector: string, child: Element): Maybe<T>;
+function closest<T extends Element>(
+  selector: string,
+  child: Element | Maybe<Element>
+): Maybe<T>;
 ```
 
 Find closest ancestor that match selector.
@@ -94,23 +106,11 @@ Create an instance of element of the specified tag.
 const element /*: Wrapper<HTMLDivElement> */ = createElement('div');
 ```
 
-### createTextNode
-
-```typescript
-function createTextNode(data: string): Wrapper<Text>;
-```
-
-Creates text string from specified value.
-
-```typescript
-const textElement /*: Wrapper<Text> */ = createTextNode('Yay!');
-```
-
 ### setAttribute
 
 ```typescript
 function setAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
@@ -126,7 +126,7 @@ querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 
 ```typescript
 function getAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
 ```
@@ -143,7 +143,7 @@ const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
 
 ```typescript
 function hasAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
 ```
@@ -160,7 +160,7 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 
 ```typescript
 function removeAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
 ```
@@ -181,7 +181,7 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 
 ```typescript
 function toggleAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames,
   force?: boolean
 ): boolean;
@@ -199,7 +199,7 @@ const hasElementAttribute /*: boolean */ = querySelector('input')
 
 ```typescript
 function appendNodes(
-  parent: ParentNode,
+  parent: ParentNode | Maybe<ParentNode>,
   ...children: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -216,7 +216,7 @@ querySelector('p').map((el) => {
 
 ```typescript
 function prependNodes(
-  parent: ParentNode,
+  parent: ParentNode | Maybe<ParentNode>,
   ...children: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -233,7 +233,7 @@ querySelector('p').map((el) => {
 
 ```typescript
 function replaceNode(
-  node: ChildNode,
+  node: ChildNode | Maybe<ChildNode>,
   ...newNodes: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -249,7 +249,7 @@ querySelector('p').map((el) => {
 ### removeNode
 
 ```typescript
-function removeNode(node: ChildNode): void;
+function removeNode(node: ChildNode | Maybe<ChildNode>): void;
 ```
 
 Removes _node_.
@@ -261,7 +261,7 @@ querySelector('p').map(removeNode);
 ### cloneNode
 
 ```typescript
-function cloneNode(node: Node, deep?: boolean): Node;
+function cloneNode(node: Node | Maybe<Node>, deep?: boolean): Maybe<Node>;
 ```
 
 Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.
@@ -274,14 +274,14 @@ querySelector('p').map(cloneNode);
 
 ```typescript
 function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
-  element: E,
+  element: E | Maybe<E>,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   } = {}
-): () => void;
+): Maybe<() => void>;
 ```
 
 Appends an event listener for events whose type attribute value is type.
@@ -290,14 +290,13 @@ The listener argument sets the callback that will be invoked when the event is d
 `options.add` is options for native _addEventListener_ method and
 `options.remove` is options for native _removeEventListener_ method.
 
-Returns function that removes `listener` from `element`s
-event listener list with same `type` and options.
+Returns `Maybe` with function that removes `listener` from `element`s event listener list with same `type` and options.
 
 ```typescript
 const removeClickOnParagraphListener /*: () => void */ = querySelector<
   HTMLParagraphElement
 >('p')
-  .map((p) => addEventListener(p, 'click', console.log))
+  .chain((p) => addEventListener(p, 'click', console.log))
   .extract();
 ```
 
@@ -308,7 +307,7 @@ function removeEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E,
+  element: E | Maybe<E>,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
@@ -319,19 +318,4 @@ Removes the event listener in target's event listener list with the same type, c
 
 ```typescript
 removeEventListener(someElement, 'click', someListener);
-```
-
-### dispatchEvent
-
-```typescript
-function dispatchEvent<E extends EventTarget>(
-  element: E,
-  event: Event
-): boolean;
-```
-
-Dispatches a synthetic event event to element and returns true if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.
-
-```typescript
-dispatchEvent(someElement, new Event('click'));
 ```

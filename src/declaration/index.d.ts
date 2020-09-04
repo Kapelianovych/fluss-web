@@ -411,7 +411,7 @@ export type AttributeNamesOf<E extends Element> = E extends HTMLFormElement
  */
 export function querySelector<T extends Element>(
   selector: string,
-  parent?: ParentNode
+  parent?: ParentNode | Maybe<ParentNode>
 ): Maybe<T>;
 
 /**
@@ -420,7 +420,7 @@ export function querySelector<T extends Element>(
  */
 export function querySelectorAll<T extends Element>(
   selector: string,
-  parent?: ParentNode
+  parent?: ParentNode | Maybe<ParentNode>
 ): ReadonlyArray<T>;
 
 /**
@@ -429,7 +429,7 @@ export function querySelectorAll<T extends Element>(
  */
 export function closest<T extends Element>(
   selector: string,
-  child: Element
+  child: Element | Maybe<Element>
 ): Maybe<T>;
 
 /**
@@ -441,15 +441,9 @@ export function createElement<T extends keyof HTMLElementTagNameMap>(
   options?: ElementCreationOptions
 ): Wrapper<HTMLElementTagNameMap[T]>;
 
-/**
- * Create text node and wrap it in Wrapper.
- * Alternative to `document.createTextNode` method.
- */
-export function createTextNode(data: string): Wrapper<Text>;
-
 /** Set attribute for element. */
 export function setAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
@@ -458,19 +452,22 @@ export function setAttribute<E extends Element>(
  * Get attribute value of element.
  */
 export function getAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
 
-/** Checks if element has attribute. */
+/**
+ * Checks if element has attribute.
+ * If element will not exists on the pagge, then `false` will be returned.
+ */
 export function hasAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
 
 /** Removes attribute from element if it has one. */
 export function removeAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
 
@@ -479,7 +476,7 @@ export function removeAttribute<E extends Element>(
  * Strings are are teplaced with `Text` elements.
  */
 export function appendNodes(
-  parent: ParentNode,
+  parent: ParentNode | Maybe<ParentNode>,
   ...children: ReadonlyArray<string | Node>
 ): void;
 
@@ -488,7 +485,7 @@ export function appendNodes(
  * Strings are are teplaced with `Text` elements.
  */
 export function prependNodes(
-  parent: ParentNode,
+  parent: ParentNode | Maybe<ParentNode>,
   ...children: ReadonlyArray<string | Node>
 ): void;
 
@@ -497,18 +494,21 @@ export function prependNodes(
  * Strings are replaced with `Text`s.
  */
 export function replaceNode(
-  node: ChildNode,
+  node: ChildNode | Maybe<ChildNode>,
   ...newNodes: ReadonlyArray<string | Node>
 ): void;
 
 /** Removes node. */
-export function removeNode(node: ChildNode): void;
+export function removeNode(node: ChildNode | Maybe<ChildNode>): void;
 
 /**
  * Clone node. If _deep_ is `true`, function returns node with all
  * descendants. By default _deep_ is `false`.
  */
-export function cloneNode(node: Node, deep?: boolean): Node;
+export function cloneNode(
+  node: Node | Maybe<Node>,
+  deep?: boolean
+): Maybe<Node>;
 
 /**
  * Appends an event listener for events whose type attribute value is type.
@@ -524,14 +524,14 @@ export function addEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E,
+  element: E | Maybe<E>,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   }
-): () => void;
+): Maybe<() => void>;
 
 /**
  * Removes the event listener in target's event listener list with the same type, callback, and options.
@@ -540,21 +540,11 @@ export function removeEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E,
+  element: E | Maybe<E>,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
 ): void;
-
-/**
- * Dispatches a synthetic event event to element and returns true if
- * either event's cancelable attribute value is false or its preventDefault()
- * method was not invoked, and false otherwise.
- */
-export function dispatchEvent<E extends EventTarget>(
-  element: E,
-  event: Event
-): boolean;
 
 /**
  * Toggles a `Boolean attribute` (removing it if it is present and
@@ -567,7 +557,7 @@ export function dispatchEvent<E extends EventTarget>(
  * Returns `true` if _name_ is now present, and `false` otherwise.
  */
 export function toggleAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames,
   force?: boolean
 ): boolean;

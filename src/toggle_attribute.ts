@@ -1,9 +1,12 @@
-import { GlobalAttributeNames, AttributeNamesOf } from './types';
+import { Maybe, maybeOf } from '@fluss/core';
+import type { GlobalAttributeNames, AttributeNamesOf } from './types';
 
 export function toggleAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames,
   force?: boolean
 ): boolean {
-  return element.toggleAttribute(name, force);
+  return maybeOf(element)
+    .map((el) => el.toggleAttribute(name, force))
+    .extract();
 }

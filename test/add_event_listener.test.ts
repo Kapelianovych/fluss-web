@@ -1,3 +1,4 @@
+import { just } from '@fluss/core';
 import { addEventListener, querySelector } from '../src';
 
 describe('addEventListener', () => {
@@ -22,18 +23,30 @@ describe('addEventListener', () => {
     });
   });
 
+  test('addEventListener adds listener to maybe element', () => {
+    let event: Event | null = null;
+
+    querySelector('.first', just(document)).map((element) => {
+      addEventListener(element, 'fullscreenchange', (evt) => {
+        event = evt;
+      });
+
+      element.dispatchEvent(new Event('fullscreenchange'));
+
+      expect(event).toBeTruthy();
+    });
+  });
+
   test('addEventListener returns function that remove previously added listener', () => {
     let event: Event | null = null;
 
     querySelector<HTMLDivElement>('.second').map((element) => {
-      const removeFullScreenChangeListener = addEventListener(
-        element,
-        'animationcancel',
-        (evt) => {
-          event = evt;
-        }
+      addEventListener(element, 'animationcancel', (evt) => {
+        event = evt;
+      }).map((removeFullScreenChangeListener) =>
+        removeFullScreenChangeListener()
       );
-      removeFullScreenChangeListener();
+
       element.dispatchEvent(new Event('fullscreenchange'));
 
       expect(event).toBeFalsy();

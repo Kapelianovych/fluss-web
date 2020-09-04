@@ -1,9 +1,9 @@
 import { maybeOf, Maybe } from '@fluss/core';
-import { AttributeNamesOf, GlobalAttributeNames } from './types';
+import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
 export function getAttribute<E extends Element>(
-  element: E,
+  element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string> {
-  return maybeOf(element.getAttribute(name));
+  return maybeOf(element).map((el) => el.getAttribute(name));
 }

@@ -1,3 +1,4 @@
+import { just } from '@fluss/core';
 import { querySelector } from '../src';
 
 describe('querySelector', () => {
@@ -7,6 +8,7 @@ describe('querySelector', () => {
     `;
 
     expect(querySelector('.el').isJust()).toBe(true);
+    expect(querySelector('.el', just(document)).isJust()).toBe(true);
     expect(querySelector('.el').extract().outerHTML).toMatch(
       '<div class="el"></div>'
     );

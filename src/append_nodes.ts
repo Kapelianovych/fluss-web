@@ -1,6 +1,8 @@
+import { Maybe, maybeOf } from '@fluss/core';
+
 export function appendNodes(
-  parent: ParentNode,
+  parent: ParentNode | Maybe<ParentNode>,
   ...children: ReadonlyArray<string | Node>
 ): void {
-  parent.append(...children);
+  maybeOf(parent).map((parentElement) => parentElement.append(...children));
 }

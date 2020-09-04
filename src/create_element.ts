@@ -1,4 +1,4 @@
-import { wrap, Wrapper } from "@fluss/core";
+import { wrap, Wrapper } from '@fluss/core';
 
 export function createElement<T extends keyof HTMLElementTagNameMap>(
   tagName: T,

@@ -1,4 +1,14 @@
-# [0.5.0] - 2020-09-01
+# [0.5.1] - 2020-09-04
+
+### Changed
+
+- Functions accept `Maybe` instance with element now.
+
+### Removed
+
+- `dispatchEvent`, `createTextNode` functions.
+
+## [0.5.0] - 2020-09-01
 
 ### Added
 

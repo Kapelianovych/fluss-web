@@ -1,6 +1,8 @@
+import { Maybe, maybeOf } from '@fluss/core';
+
 export function replaceNode(
-  node: ChildNode,
+  node: ChildNode | Maybe<ChildNode>,
   ...newNodes: ReadonlyArray<string | Node>
 ): void {
-  node.replaceWith(...newNodes);
+  maybeOf(node).map((n) => n.replaceWith(...newNodes));
 }
