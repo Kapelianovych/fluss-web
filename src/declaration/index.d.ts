@@ -447,6 +447,11 @@ export function setAttribute<E extends Element>(
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
+export function setAttribute<E extends Element>(
+  element: E | Maybe<E>,
+  key: string,
+  value: string
+): void;
 
 /**
  * Get attribute value of element.
@@ -454,6 +459,10 @@ export function setAttribute<E extends Element>(
 export function getAttribute<E extends Element>(
   element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
+): Maybe<string>;
+export function getAttribute<E extends Element>(
+  element: E | Maybe<E>,
+  name: string
 ): Maybe<string>;
 
 /**
@@ -464,11 +473,19 @@ export function hasAttribute<E extends Element>(
   element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
+export function hasAttribute<E extends Element>(
+  element: E | Maybe<E>,
+  name: string
+): boolean;
 
 /** Removes attribute from element if it has one. */
 export function removeAttribute<E extends Element>(
   element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames
+): void;
+export function removeAttribute<E extends Element>(
+  element: E | Maybe<E>,
+  name: string
 ): void;
 
 /**
@@ -505,10 +522,10 @@ export function removeNode(node: ChildNode | Maybe<ChildNode>): void;
  * Clone node. If _deep_ is `true`, function returns node with all
  * descendants. By default _deep_ is `false`.
  */
-export function cloneNode(
-  node: Node | Maybe<Node>,
+export function cloneNode<T extends Node>(
+  node: T | Maybe<T>,
   deep?: boolean
-): Maybe<Node>;
+): Maybe<T>;
 
 /**
  * Appends an event listener for events whose type attribute value is type.
@@ -559,5 +576,10 @@ export function removeEventListener<
 export function toggleAttribute<E extends Element>(
   element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames,
+  force?: boolean
+): boolean;
+export function toggleAttribute<E extends Element>(
+  element: E | Maybe<E>,
+  name: string,
   force?: boolean
 ): boolean;

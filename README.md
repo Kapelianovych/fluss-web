@@ -261,7 +261,10 @@ querySelector('p').map(removeNode);
 ### cloneNode
 
 ```typescript
-function cloneNode(node: Node | Maybe<Node>, deep?: boolean): Maybe<Node>;
+function cloneNode<T extends Node>(
+  node: T | Maybe<T>,
+  deep?: boolean
+): Maybe<T>;
 ```
 
 Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.

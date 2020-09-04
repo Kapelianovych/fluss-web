@@ -1,6 +1,6 @@
 {
   "name": "@fluss/web",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Functions for functional programming in browser.",
   "keywords": [
     "functional web",
@@ -36,6 +36,6 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@fluss/core": "^0.5.2"
+    "@fluss/core": "^0.5.4"
   }
 }

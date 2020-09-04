@@ -1,4 +1,11 @@
-# [0.5.1] - 2020-09-04
+# [0.5.2] - 2020-09-04
+
+### Fixed
+
+- Custom attribute names are available to pass to `setAttribute`, `getAttribute`, `removeAttribute`, `hasAttribute` and `toggleAttribute` functions.
+- `cloneNode` returns now proper type of cloned node.
+
+## [0.5.1] - 2020-09-04
 
 ### Changed
 
