@@ -1,9 +1,9 @@
 import { Maybe, maybeOf } from '@fluss/core';
-import type { GlobalAttributeNames, AttributeNamesOf } from './types';
+import type { BooleanAttributesOf } from './types';
 
 export function toggleAttribute<E extends Element>(
   element: E | Maybe<E>,
-  name: AttributeNamesOf<E> | GlobalAttributeNames,
+  name: BooleanAttributesOf<E>,
   force?: boolean
 ): boolean;
 export function toggleAttribute<E extends Element>(
@@ -13,7 +13,7 @@ export function toggleAttribute<E extends Element>(
 ): boolean;
 export function toggleAttribute<E extends Element>(
   element: E | Maybe<E>,
-  name: AttributeNamesOf<E> | GlobalAttributeNames | string,
+  name: BooleanAttributesOf<E> | string,
   force?: boolean
 ): boolean {
   return maybeOf(element)

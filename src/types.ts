@@ -13,7 +13,7 @@ export type EventMapOf<E> = E extends SVGElement
   : E extends Window
   ? WindowEventMap
   : E extends Document
-  ? DocumentEventMap
+  ? DocumentEventMap | { DOMContentLoaded: Event }
   : { [key: string]: Event };
 
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
@@ -398,3 +398,49 @@ export type AttributeNamesOf<E extends Element> = E extends HTMLFormElement
   : E extends HTMLLIElement
   ? LiAttributeNames
   : GlobalAttributeNames;
+
+/** [Link to list.](https://html.spec.whatwg.org/#attributes-3) */
+export type BooleanAttributesOf<T extends Element> = T extends HTMLIFrameElement
+  ? 'allowfullscreen'
+  : T extends HTMLScriptElement
+  ? 'async' | 'defer' | 'nomodule'
+  : T extends HTMLAudioElement
+  ? 'autoplay' | 'controls' | 'loop' | 'muted'
+  : T extends HTMLVideoElement
+  ? 'autoplay' | 'controls' | 'loop' | 'muted' | 'playsinline'
+  : T extends HTMLInputElement
+  ?
+      | 'checked'
+      | 'disabled'
+      | 'formnovalidate'
+      | 'multiple'
+      | 'readonly'
+      | 'required'
+  : T extends HTMLTrackElement
+  ? 'default'
+  : T extends HTMLButtonElement
+  ? 'disabled' | 'formnovalidate'
+  : T extends HTMLOptGroupElement
+  ? 'disabled'
+  : T extends HTMLOptionElement
+  ? 'disabled' | 'selected'
+  : T extends HTMLSelectElement
+  ? 'disabled' | 'multiple' | 'required'
+  : T extends HTMLTextAreaElement
+  ? 'disabled' | 'readonly' | 'required'
+  : T extends HTMLFieldSetElement
+  ? 'disabled'
+  : T extends HTMLLinkElement
+  ? 'disabled'
+  : T extends HTMLImageElement
+  ? 'ismap'
+  : T extends HTMLFormElement
+  ? 'novalidate'
+  : T extends HTMLDetailsElement
+  ? 'open'
+  : T extends HTMLDialogElement
+  ? 'open'
+  : T extends HTMLOListElement
+  ? 'reversed'
+  : // Common for most elements.
+    'autofocus' | 'hidden' | 'itemscope';

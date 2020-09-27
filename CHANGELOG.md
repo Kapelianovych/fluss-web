@@ -1,4 +1,15 @@
-# [0.5.2] - 2020-09-04
+# [0.5.3] - 2020-09-27
+
+### Added
+
+- `DOMContentLoaded` event to `Document`.
+- Boolean attributes type `BooleanAttributesOf`.
+
+### Changed
+
+- `toggleAttribute` infer now boolean attributes of `element`'s type.
+
+## [0.5.2] - 2020-09-04
 
 ### Fixed
 

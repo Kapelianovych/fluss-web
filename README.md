@@ -151,9 +151,10 @@ function hasAttribute<E extends Element>(
 Checks if element has attribute.
 
 ```typescript
-const hasElementAttribute /*: boolean */ = querySelector('div')
-  .map((el) => hasAttribute(el, 'class'))
-  .extract();
+const hasElementAttribute /*: boolean */ = hasAttribute(
+  querySelector('div'),
+  'class'
+);
 ```
 
 ### removeAttribute
@@ -182,7 +183,7 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 ```typescript
 function toggleAttribute<E extends Element>(
   element: E | Maybe<E>,
-  name: AttributeNamesOf<E> | GlobalAttributeNames,
+  name: BooleanAttributesOf<E>,
   force?: boolean
 ): boolean;
 ```
@@ -190,9 +191,10 @@ function toggleAttribute<E extends Element>(
 Toggles a `Boolean attribute` (removing it if it is present and adding it if it is not present) on the given element.
 
 ```typescript
-const hasElementAttribute /*: boolean */ = querySelector('input')
-  .map((el) => toogleAttribute(el, 'readonly'))
-  .extract();
+const hasElementAttribute /*: boolean */ = toogleAttribute(
+  querySelector('input'),
+  'readonly'
+).extract();
 ```
 
 ### appendNodes
