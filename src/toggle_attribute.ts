@@ -16,7 +16,9 @@ export function toggleAttribute<E extends Element>(
   name: BooleanAttributesOf<E> | string,
   force?: boolean
 ): boolean {
-  return maybeOf(element)
-    .map((el) => el.toggleAttribute(name, force))
-    .extract();
+  return Boolean(
+    maybeOf(element)
+      .map((el) => el.toggleAttribute(name, force))
+      .extract()
+  );
 }

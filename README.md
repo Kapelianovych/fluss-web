@@ -266,13 +266,14 @@ querySelector('p').map(removeNode);
 function cloneNode<T extends Node>(
   node: T | Maybe<T>,
   deep?: boolean
-): Maybe<T>;
+): T | Maybe<T>;
 ```
 
 Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.
 
 ```typescript
-querySelector('p').map(cloneNode);
+const clonedP: /*: Element */ = cloneNode(somePElement);
+const clonedDiv: /*: Maybe<Element> */ = cloneNode(querySelector('p'));
 ```
 
 ### addEventListener
@@ -286,7 +287,7 @@ function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   } = {}
-): Maybe<() => void>;
+): (() => void) | Maybe<() => void>;
 ```
 
 Appends an event listener for events whose type attribute value is type.
@@ -295,13 +296,13 @@ The listener argument sets the callback that will be invoked when the event is d
 `options.add` is options for native _addEventListener_ method and
 `options.remove` is options for native _removeEventListener_ method.
 
-Returns `Maybe` with function that removes `listener` from `element`s event listener list with same `type` and options.
+Returns `Maybe` with function if _element_ is `Maybe<T>`, otherwise function itself, that removes `listener` from _element_ with same `type` and options.
 
 ```typescript
 const removeClickOnParagraphListener /*: () => void */ = querySelector<
   HTMLParagraphElement
 >('p')
-  .chain((p) => addEventListener(p, 'click', console.log))
+  .map((p) => addEventListener(p, 'click', console.log))
   .extract();
 ```
 

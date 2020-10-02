@@ -13,7 +13,9 @@ export function hasAttribute<E extends Element>(
   element: E | Maybe<E>,
   name: AttributeNamesOf<E> | GlobalAttributeNames | string
 ): boolean {
-  return maybeOf(element)
-    .map((el) => el.hasAttribute(name))
-    .extract();
+  return Boolean(
+    maybeOf(element)
+      .map((el) => el.hasAttribute(name))
+      .extract()
+  );
 }

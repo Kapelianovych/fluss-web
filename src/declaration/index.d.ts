@@ -569,9 +569,10 @@ export function removeNode(node: ChildNode | Maybe<ChildNode>): void;
  * descendants. By default _deep_ is `false`.
  */
 export function cloneNode<T extends Node>(
-  node: T | Maybe<T>,
+  node: Maybe<T>,
   deep?: boolean
 ): Maybe<T>;
+export function cloneNode<T extends Node>(node: T, deep?: boolean): T;
 
 /**
  * Appends an event listener for events whose type attribute value is type.
@@ -580,14 +581,14 @@ export function cloneNode<T extends Node>(
  * `options.add` is options for native _addEventListener_ method and
  * `options.remove` is options for native _removeEventListener_ method.
  *
- * Returns function that removes `listener` from `element`s
+ * Returns function itself or wrapped in `Maybe` that removes `listener` from `element`s
  * event listener list with same `type` and options.
  */
 export function addEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E | Maybe<E>,
+  element: Maybe<E>,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: {
@@ -595,9 +596,22 @@ export function addEventListener<
     remove?: boolean | EventListenerOptions;
   }
 ): Maybe<() => void>;
+export function addEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
+  element: E,
+  type: T,
+  listener: EventListenerOrEventListenerObject<E, T>,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): () => void;
 
 /**
- * Removes the event listener in target's event listener list with the same type, callback, and options.
+ * Removes the event listener in target's event listener list with 
+ * the same type, callback, and options.
  */
 export function removeEventListener<
   E extends EventTarget,

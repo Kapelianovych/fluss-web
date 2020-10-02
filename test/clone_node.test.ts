@@ -7,8 +7,7 @@ describe('cloneNode', () => {
 
   test('cloneNode clones node with default deep value', () => {
     expect(
-      querySelector('p')
-        .chain(cloneNode)
+      cloneNode(querySelector('p'))
         .map((clonedP) => {
           expect((clonedP as Element).innerHTML).toMatch('');
         })
@@ -18,7 +17,7 @@ describe('cloneNode', () => {
   test('cloneNode clones node with descendants', () => {
     expect(
       querySelector('p')
-        .chain((p) => cloneNode(p, true))
+        .map((p) => cloneNode(p, true))
         .map((clonedP) => {
           expect((clonedP as Element).innerHTML).toMatch('<a></a>');
         })

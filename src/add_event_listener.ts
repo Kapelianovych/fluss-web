@@ -1,17 +1,31 @@
 import { removeEventListener } from './remove_event_listener';
-import { Maybe, maybeOf } from '@fluss/core';
+import { isMaybe, Maybe, maybeOf } from '@fluss/core';
 import type { EventMapOf, EventListenerOrEventListenerObject } from './types';
 
-/**
- * Appends an event listener for events whose type attribute value is type.
- * The listener argument sets the callback that will be invoked when the event is dispatched.
- *
- * `options.add` is options for native _addEventListener_ method and
- * `options.remove` is options for native _removeEventListener_ method.
- *
- * Returns function that removes `listener` from `element`s
- * event listener list with same `type` and options.
- */
+export function addEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
+  element: Maybe<E>,
+  type: T,
+  listener: EventListenerOrEventListenerObject<E, T>,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): Maybe<() => void>;
+export function addEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
+  element: E,
+  type: T,
+  listener: EventListenerOrEventListenerObject<E, T>,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): () => void;
 export function addEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
@@ -23,11 +37,11 @@ export function addEventListener<
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   } = {}
-): Maybe<() => void> {
+): (() => void) | Maybe<() => void> {
   // keyof returns string | number | symbol type, which is not
   // exists in EventMapOf<E> type. TypeScript possibly cannot narrow type here.
   // Also TypeScript's EventListenerOrEventListenerObject cannot narrow event type :(
-  return maybeOf(element)
+  const maybeDetachContainer = maybeOf(element)
     .map((target) => {
       target.addEventListener(
         type as string,
@@ -39,4 +53,8 @@ export function addEventListener<
     .map((target) => () =>
       removeEventListener<E, T>(target as E, type, listener, options.remove)
     );
+
+  return isMaybe<E>(element)
+    ? maybeDetachContainer
+    : maybeDetachContainer.extract();
 }

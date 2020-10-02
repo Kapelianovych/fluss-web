@@ -1,4 +1,14 @@
-# [0.5.3] - 2020-09-27
+# [0.6.0] - 2020-10-02
+
+### Changed
+
+- `cloneNode` and `addEventListener` now return result wrapped in `Maybe` container if element is also wrapped in `Maybe`, otherwise they return direct result.
+
+### Fixed
+
+- `hasAttribute` and `toggleAttribute` now return _false_ if _element_ is absent (wrapped in `Maybe`).
+
+## [0.5.3] - 2020-09-27
 
 ### Added
 
