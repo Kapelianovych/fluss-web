@@ -1,4 +1,10 @@
-# [0.6.0] - 2020-10-02
+# [0.6.1] - 2020-10-07
+
+### Fixed
+
+- Bump packages and fix inner type bug in `addEventListener` function.
+
+## [0.6.0] - 2020-10-02
 
 ### Changed
 

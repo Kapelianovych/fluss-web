@@ -56,5 +56,5 @@ export function addEventListener<
 
   return isMaybe<E>(element)
     ? maybeDetachContainer
-    : maybeDetachContainer.extract();
+    : maybeDetachContainer.extract() as () => void;
 }
