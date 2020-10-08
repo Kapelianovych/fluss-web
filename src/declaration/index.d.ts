@@ -455,6 +455,10 @@ export type BooleanAttributesOf<T extends Element> = T extends HTMLIFrameElement
  * Select element from parent node. By default selects from **document**.
  * Safe variant of `document.querySelector` method.
  */
+export function querySelector<T extends keyof HTMLElementTagNameMap>(
+  selector: T,
+  parent?: ParentNode | Maybe<ParentNode>
+): Maybe<HTMLElementTagNameMap[T]>;
 export function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode>
@@ -464,6 +468,10 @@ export function querySelector<T extends Element>(
  * Select elements from parent node. By default selects from **document**.
  * Functional variant of `document.querySelectorAll` method.
  */
+export function querySelectorAll<T extends keyof HTMLElementTagNameMap>(
+  selector: T,
+  parent?: ParentNode | Maybe<ParentNode>
+): ReadonlyArray<HTMLElementTagNameMap[T]>;
 export function querySelectorAll<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode>
@@ -486,6 +494,10 @@ export function createElement<T extends keyof HTMLElementTagNameMap>(
   tagName: T,
   options?: ElementCreationOptions
 ): Wrapper<HTMLElementTagNameMap[T]>;
+export function createElement(
+  tagName: string,
+  options?: ElementCreationOptions
+): Wrapper<HTMLElement>;
 
 /** Set attribute for element. */
 export function setAttribute<E extends Element>(
@@ -610,7 +622,7 @@ export function addEventListener<
 ): () => void;
 
 /**
- * Removes the event listener in target's event listener list with 
+ * Removes the event listener in target's event listener list with
  * the same type, callback, and options.
  */
 export function removeEventListener<

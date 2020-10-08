@@ -1,4 +1,10 @@
-# [0.6.1] - 2020-10-07
+# [0.6.2] - 2020-10-08
+
+### Fixed
+
+- Improve `querySelector`, `querySelectorAll` and `createElement` types infering.
+
+## [0.6.1] - 2020-10-07
 
 ### Fixed
 

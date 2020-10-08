@@ -1,5 +1,13 @@
 import { Maybe, maybeOf } from '@fluss/core';
 
+export function querySelectorAll<T extends keyof HTMLElementTagNameMap>(
+  selector: T,
+  parent?: ParentNode | Maybe<ParentNode>
+): ReadonlyArray<HTMLElementTagNameMap[T]>;
+export function querySelectorAll<T extends Element>(
+  selector: string,
+  parent?: ParentNode | Maybe<ParentNode>
+): ReadonlyArray<T>;
 export function querySelectorAll<T extends Element>(
   selector: string,
   parent: ParentNode | Maybe<ParentNode> = document

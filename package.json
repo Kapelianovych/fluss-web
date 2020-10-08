@@ -1,6 +1,6 @@
 {
   "name": "@fluss/web",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Functions for functional programming in browser.",
   "keywords": [
     "functional web",
