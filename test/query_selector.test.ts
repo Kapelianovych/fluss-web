@@ -1,16 +1,15 @@
-import { just } from '@fluss/core';
 import { querySelector } from '../src';
 
 describe('querySelector', () => {
   test('querySelector function gets element from the page', () => {
     document.body.innerHTML = `
-      <div class="el"></div>
+      <div class="el"><p></p></div>
     `;
 
     expect(querySelector('.el').isJust()).toBe(true);
-    expect(querySelector('.el', just(document)).isJust()).toBe(true);
-    expect(querySelector('.el').extract().outerHTML).toMatch(
-      '<div class="el"></div>'
+    expect(querySelector('p', querySelector('.el')).isJust()).toBe(true);
+    querySelector('.el').map((el) =>
+      expect(el.outerHTML).toMatch('<div class="el"><p></p></div>')
     );
   });
 
