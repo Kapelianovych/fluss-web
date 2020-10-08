@@ -12,7 +12,5 @@ export function querySelector<T extends Element>(
   selector: string,
   parent: ParentNode | Maybe<ParentNode> = document
 ): Maybe<T> {
-  return maybeOf(parent).map((parentElement) => {
-    return parentElement.querySelector<T>(selector);
-  });
+  return maybeOf(parent).map((element) => element.querySelector<T>(selector));
 }
