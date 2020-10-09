@@ -457,11 +457,11 @@ export type BooleanAttributesOf<T extends Element> = T extends HTMLIFrameElement
  */
 export function querySelector<T extends keyof HTMLElementTagNameMap>(
   selector: T,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): Maybe<HTMLElementTagNameMap[T]>;
 export function querySelector<T extends Element>(
   selector: string,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): Maybe<T>;
 
 /**
@@ -470,11 +470,11 @@ export function querySelector<T extends Element>(
  */
 export function querySelectorAll<T extends keyof HTMLElementTagNameMap>(
   selector: T,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): ReadonlyArray<HTMLElementTagNameMap[T]>;
 export function querySelectorAll<T extends Element>(
   selector: string,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): ReadonlyArray<T>;
 
 /**
@@ -483,7 +483,7 @@ export function querySelectorAll<T extends Element>(
  */
 export function closest<T extends Element>(
   selector: string,
-  child: Element | Maybe<Element>
+  child: Element | Maybe<Element> | null
 ): Maybe<T>;
 
 /**
@@ -501,12 +501,12 @@ export function createElement(
 
 /** Set attribute for element. */
 export function setAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
 export function setAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   key: string,
   value: string
 ): void;
@@ -515,11 +515,11 @@ export function setAttribute<E extends Element>(
  * Get attribute value of element.
  */
 export function getAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
 export function getAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: string
 ): Maybe<string>;
 
@@ -528,21 +528,21 @@ export function getAttribute<E extends Element>(
  * If element will not exists on the pagge, then `false` will be returned.
  */
 export function hasAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
 export function hasAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: string
 ): boolean;
 
 /** Removes attribute from element if it has one. */
 export function removeAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
 export function removeAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: string
 ): void;
 
@@ -551,7 +551,7 @@ export function removeAttribute<E extends Element>(
  * Strings are are teplaced with `Text` elements.
  */
 export function appendNodes(
-  parent: ParentNode | Maybe<ParentNode>,
+  parent: ParentNode | Maybe<ParentNode> | null,
   ...children: ReadonlyArray<string | Node>
 ): void;
 
@@ -560,7 +560,7 @@ export function appendNodes(
  * Strings are are teplaced with `Text` elements.
  */
 export function prependNodes(
-  parent: ParentNode | Maybe<ParentNode>,
+  parent: ParentNode | Maybe<ParentNode> | null,
   ...children: ReadonlyArray<string | Node>
 ): void;
 
@@ -569,22 +569,21 @@ export function prependNodes(
  * Strings are replaced with `Text`s.
  */
 export function replaceNode(
-  node: ChildNode | Maybe<ChildNode>,
+  node: ChildNode | Maybe<ChildNode> | null,
   ...newNodes: ReadonlyArray<string | Node>
 ): void;
 
 /** Removes node. */
-export function removeNode(node: ChildNode | Maybe<ChildNode>): void;
+export function removeNode(node: ChildNode | Maybe<ChildNode> | null): void;
 
 /**
  * Clone node. If _deep_ is `true`, function returns node with all
  * descendants. By default _deep_ is `false`.
  */
 export function cloneNode<T extends Node>(
-  node: Maybe<T>,
+  node: T | Maybe<T> | null,
   deep?: boolean
 ): Maybe<T>;
-export function cloneNode<T extends Node>(node: T, deep?: boolean): T;
 
 /**
  * Appends an event listener for events whose type attribute value is type.
@@ -593,14 +592,14 @@ export function cloneNode<T extends Node>(node: T, deep?: boolean): T;
  * `options.add` is options for native _addEventListener_ method and
  * `options.remove` is options for native _removeEventListener_ method.
  *
- * Returns function itself or wrapped in `Maybe` that removes `listener` from `element`s
+ * Returns `Maybe` with function that removes `listener` from `element`s
  * event listener list with same `type` and options.
  */
 export function addEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: Maybe<E>,
+  element: E | Maybe<E> | null,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: {
@@ -608,18 +607,6 @@ export function addEventListener<
     remove?: boolean | EventListenerOptions;
   }
 ): Maybe<() => void>;
-export function addEventListener<
-  E extends EventTarget,
-  T extends keyof EventMapOf<E>
->(
-  element: E,
-  type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
-  options?: {
-    add?: boolean | AddEventListenerOptions;
-    remove?: boolean | EventListenerOptions;
-  }
-): () => void;
 
 /**
  * Removes the event listener in target's event listener list with
@@ -629,7 +616,7 @@ export function removeEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
@@ -646,12 +633,12 @@ export function removeEventListener<
  * Returns `true` if _name_ is now present, and `false` otherwise.
  */
 export function toggleAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: BooleanAttributesOf<E>,
   force?: boolean
 ): boolean;
 export function toggleAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: string,
   force?: boolean
 ): boolean;

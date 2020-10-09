@@ -29,13 +29,21 @@ Functions that deals with attributes (`getAttribute`, `setAttribute`, `hasAttrib
 
 Every function is created as small as possible.
 
-# Install
+## Install
 
 ```sh
 npm i @fluss/web
 ```
 
+## Import
+
+```js
+import { querySelector } from '@fluss/web';
+```
+
 ## API
+
+Package is bundled as _ES module_. It doesn't support _CommonJS_. If you need it convert with any tool (`Rollup`, `Babel` etc.).
 
 > In TypeScript examples is used [Flow](https://flow.org)'s comment notation if type is inferred.
 
@@ -44,7 +52,7 @@ npm i @fluss/web
 ```typescript
 function querySelector<T extends Element>(
   selector: string,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): Maybe<T>;
 ```
 
@@ -60,7 +68,7 @@ const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same);
 ```typescript
 function querySelectorAll<T extends Element>(
   selector: string,
-  parent?: ParentNode | Maybe<ParentNode>
+  parent?: ParentNode | Maybe<ParentNode> | null
 ): ReadonlyArray<T>;
 ```
 
@@ -81,7 +89,7 @@ const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
 ```typescript
 function closest<T extends Element>(
   selector: string,
-  child: Element | Maybe<Element>
+  child: Element | Maybe<Element> | null
 ): Maybe<T>;
 ```
 
@@ -110,7 +118,7 @@ const element /*: Wrapper<HTMLDivElement> */ = createElement('div');
 
 ```typescript
 function setAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
@@ -126,7 +134,7 @@ querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
 
 ```typescript
 function getAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
 ```
@@ -143,7 +151,7 @@ const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
 
 ```typescript
 function hasAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
 ```
@@ -161,7 +169,7 @@ const hasElementAttribute /*: boolean */ = hasAttribute(
 
 ```typescript
 function removeAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
 ```
@@ -182,7 +190,7 @@ const hasElementAttribute /*: boolean */ = querySelector('div')
 
 ```typescript
 function toggleAttribute<E extends Element>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   name: BooleanAttributesOf<E>,
   force?: boolean
 ): boolean;
@@ -201,7 +209,7 @@ const hasElementAttribute /*: boolean */ = toogleAttribute(
 
 ```typescript
 function appendNodes(
-  parent: ParentNode | Maybe<ParentNode>,
+  parent: ParentNode | Maybe<ParentNode> | null,
   ...children: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -218,7 +226,7 @@ querySelector('p').map((el) => {
 
 ```typescript
 function prependNodes(
-  parent: ParentNode | Maybe<ParentNode>,
+  parent: ParentNode | Maybe<ParentNode> | null,
   ...children: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -235,7 +243,7 @@ querySelector('p').map((el) => {
 
 ```typescript
 function replaceNode(
-  node: ChildNode | Maybe<ChildNode>,
+  node: ChildNode | Maybe<ChildNode> | null,
   ...newNodes: ReadonlyArray<string | Node>
 ): void;
 ```
@@ -251,7 +259,7 @@ querySelector('p').map((el) => {
 ### removeNode
 
 ```typescript
-function removeNode(node: ChildNode | Maybe<ChildNode>): void;
+function removeNode(node: ChildNode | Maybe<ChildNode> | null): void;
 ```
 
 Removes _node_.
@@ -264,9 +272,9 @@ querySelector('p').map(removeNode);
 
 ```typescript
 function cloneNode<T extends Node>(
-  node: T | Maybe<T>,
+  node: T | Maybe<T> | null,
   deep?: boolean
-): T | Maybe<T>;
+): Maybe<T>;
 ```
 
 Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.
@@ -280,14 +288,14 @@ const clonedDiv: /*: Maybe<Element> */ = cloneNode(querySelector('p'));
 
 ```typescript
 function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   } = {}
-): (() => void) | Maybe<() => void>;
+): Maybe<() => void>;
 ```
 
 Appends an event listener for events whose type attribute value is type.
@@ -313,7 +321,7 @@ function removeEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions

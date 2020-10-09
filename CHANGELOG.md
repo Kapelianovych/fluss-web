@@ -1,4 +1,15 @@
-# [0.6.2] - 2020-10-08
+# Unreleased
+
+### Changed
+
+- All parameters that can be `Maybe` are nullable now.
+- Bundle uses ES2018 features now.
+
+### Removed
+
+- CommonJS version of package.
+
+## [0.6.2] - 2020-10-08
 
 ### Fixed
 

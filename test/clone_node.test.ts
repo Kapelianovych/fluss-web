@@ -17,7 +17,7 @@ describe('cloneNode', () => {
   test('cloneNode clones node with descendants', () => {
     expect(
       querySelector('p')
-        .map((p) => cloneNode(p, true))
+        .chain((p) => cloneNode(p, true))
         .map((clonedP) => {
           expect((clonedP as Element).innerHTML).toMatch('<a></a>');
         })

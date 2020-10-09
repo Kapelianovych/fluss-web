@@ -9,7 +9,7 @@ export function removeEventListener<
   E extends EventTarget,
   T extends keyof EventMapOf<E>
 >(
-  element: E | Maybe<E>,
+  element: E | Maybe<E> | null,
   type: T,
   listener: EventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions

@@ -43,7 +43,7 @@ describe('addEventListener', () => {
     querySelector<HTMLDivElement>('.second').map((element) => {
       addEventListener(element, 'animationcancel', (evt) => {
         event = evt;
-      })();
+      }).map((fn) => fn());
 
       element.dispatchEvent(new Event('fullscreenchange'));
 
