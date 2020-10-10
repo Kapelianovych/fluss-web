@@ -1,3 +1,7 @@
+interface DocumentExtendedEventMap extends DocumentEventMap {
+  DOMContentLoaded: Event;
+}
+
 /** List of all maps of event name and listeners. */
 export type EventMapOf<E> = E extends SVGElement
   ? SVGElementEventMap
@@ -13,7 +17,7 @@ export type EventMapOf<E> = E extends SVGElement
   : E extends Window
   ? WindowEventMap
   : E extends Document
-  ? DocumentEventMap | { DOMContentLoaded: Event }
+  ? DocumentExtendedEventMap
   : { [key: string]: Event };
 
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];

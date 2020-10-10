@@ -1,5 +1,9 @@
 import { Maybe, Wrapper } from '@fluss/core';
 
+interface DocumentExtendedEventMap extends DocumentEventMap {
+  DOMContentLoaded: Event;
+}
+
 /**
  * List of all maps of event name and listeners.
  */
@@ -17,7 +21,7 @@ export type EventMapOf<E> = E extends SVGElement
   : E extends Window
   ? WindowEventMap
   : E extends Document
-  ? DocumentEventMap | { DOMContentLoaded: Event }
+  ? DocumentExtendedEventMap
   : { [key: string]: Event };
 
 /** Gets event based on element and event type. */
