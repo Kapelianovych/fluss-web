@@ -6,8 +6,8 @@ export function setAttribute<E extends Element>(
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
-export function setAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function setAttribute(
+  element: Element | Maybe<Element> | null,
   key: string,
   value: string
 ): void;

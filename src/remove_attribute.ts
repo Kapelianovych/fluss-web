@@ -6,8 +6,8 @@ export function removeAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
-export function removeAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function removeAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): void;
 export function removeAttribute<E extends Element>(

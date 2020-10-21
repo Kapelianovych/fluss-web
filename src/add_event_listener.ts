@@ -1,6 +1,9 @@
 import { removeEventListener } from './remove_event_listener';
 import { Maybe, maybeOf } from '@fluss/core';
-import type { EventMapOf, EventListenerOrEventListenerObject } from './types';
+import type {
+  EventMapOf,
+  CustomEventListenerOrEventListenerObject,
+} from './types';
 
 export function addEventListener<
   E extends EventTarget,
@@ -8,7 +11,28 @@ export function addEventListener<
 >(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): Maybe<() => void>;
+export function addEventListener(
+  element: EventTarget | Maybe<EventTarget> | null,
+  type: string,
+  listener: EventListenerOrEventListenerObject,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): Maybe<() => void>;
+export function addEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
+  element: E | Maybe<E> | null,
+  type: T,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;

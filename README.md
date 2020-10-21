@@ -290,7 +290,7 @@ const clonedDiv: /*: Maybe<Element> */ = cloneNode(querySelector('p'));
 function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
   options: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -323,7 +323,7 @@ function removeEventListener<
 >(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
 ): void;
 ```

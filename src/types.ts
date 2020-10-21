@@ -2,6 +2,10 @@ interface DocumentExtendedEventMap extends DocumentEventMap {
   DOMContentLoaded: Event;
 }
 
+interface CommonEventMap {
+  [key: string]: Event;
+}
+
 /** List of all maps of event name and listeners. */
 export type EventMapOf<E> = E extends SVGElement
   ? SVGElementEventMap
@@ -18,22 +22,22 @@ export type EventMapOf<E> = E extends SVGElement
   ? WindowEventMap
   : E extends Document
   ? DocumentExtendedEventMap
-  : { [key: string]: Event };
+  : CommonEventMap;
 
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
 
-export type EventListener<E, T extends keyof EventMapOf<E>> = (
+export type CustomEventListener<E, T extends keyof EventMapOf<E>> = (
   event: EventOf<E, T>
 ) => void;
 
-export type EventListenerObject<E, T extends keyof EventMapOf<E>> = {
+export type CustomEventListenerObject<E, T extends keyof EventMapOf<E>> = {
   handleEvent: (event: EventOf<E, T>) => void;
 };
 
-export type EventListenerOrEventListenerObject<
+export type CustomEventListenerOrEventListenerObject<
   E,
   T extends keyof EventMapOf<E>
-> = EventListener<E, T> | EventListenerObject<E, T>;
+> = CustomEventListener<E, T> | CustomEventListenerObject<E, T>;
 
 /**
  * Global attributes are attributes common to all HTML elements;

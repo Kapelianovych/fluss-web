@@ -5,8 +5,8 @@ export function getAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
-export function getAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function getAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): Maybe<string>;
 export function getAttribute<E extends Element>(

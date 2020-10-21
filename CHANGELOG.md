@@ -1,9 +1,14 @@
-# Unreleased
+# [0.7.0] - 2020-10-21
+
+### Added
+
+- `string` type to _type_ parameter of `addEventListener` and `removeEventListener` functions.
 
 ### Changed
 
 - All parameters that can be `Maybe` are nullable now.
 - Bundle uses ES2018 features now.
+- `hasAttribute`, `toggleAttribute`, `getAttribute`, `setAttribute` and `removeAttribute` have now overloaded type with common default types.
 
 ### Removed
 

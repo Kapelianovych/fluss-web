@@ -5,8 +5,8 @@ export function hasAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
-export function hasAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function hasAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): boolean;
 export function hasAttribute<E extends Element>(

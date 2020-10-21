@@ -1,5 +1,8 @@
 import { Maybe, maybeOf } from '@fluss/core';
-import type { EventMapOf, EventListenerOrEventListenerObject } from './types';
+import type {
+  EventMapOf,
+  CustomEventListenerOrEventListenerObject,
+} from './types';
 
 /**
  * Removes the event listener in target's event listener list
@@ -11,7 +14,22 @@ export function removeEventListener<
 >(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
+  options?: boolean | EventListenerOptions
+): void;
+export function removeEventListener(
+  element: EventTarget | Maybe<EventTarget> | null,
+  type: string,
+  listener: EventListenerOrEventListenerObject,
+  options?: boolean | EventListenerOptions
+): void;
+export function removeEventListener<
+  E extends EventTarget,
+  T extends keyof EventMapOf<E>
+>(
+  element: E | Maybe<E> | null,
+  type: T,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
   options?: boolean | EventListenerOptions
 ): void {
   // keyof returns string | number | symbol type, which is not

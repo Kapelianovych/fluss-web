@@ -4,6 +4,10 @@ interface DocumentExtendedEventMap extends DocumentEventMap {
   DOMContentLoaded: Event;
 }
 
+interface CommonEventMap {
+  [key: string]: Event;
+}
+
 /**
  * List of all maps of event name and listeners.
  */
@@ -22,23 +26,23 @@ export type EventMapOf<E> = E extends SVGElement
   ? WindowEventMap
   : E extends Document
   ? DocumentExtendedEventMap
-  : { [key: string]: Event };
+  : CommonEventMap;
 
 /** Gets event based on element and event type. */
 export type EventOf<E, T extends keyof EventMapOf<E>> = EventMapOf<E>[T];
 
-export type EventListener<E, T extends keyof EventMapOf<E>> = (
+export type CustomEventListener<E, T extends keyof EventMapOf<E>> = (
   event: EventOf<E, T>
 ) => void;
 
-export type EventListenerObject<E, T extends keyof EventMapOf<E>> = {
+export type CustomEventListenerObject<E, T extends keyof EventMapOf<E>> = {
   handleEvent: (event: EventOf<E, T>) => void;
 };
 
-export type EventListenerOrEventListenerObject<
+export type CustomEventListenerOrEventListenerObject<
   E,
   T extends keyof EventMapOf<E>
-> = EventListener<E, T> | EventListenerObject<E, T>;
+> = CustomEventListener<E, T> | CustomEventListenerObject<E, T>;
 
 /**
  * Global attributes are attributes common to all HTML elements;
@@ -509,8 +513,8 @@ export function setAttribute<E extends Element>(
   key: AttributeNamesOf<E> | GlobalAttributeNames,
   value: string
 ): void;
-export function setAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function setAttribute(
+  element: Element | Maybe<Element> | null,
   key: string,
   value: string
 ): void;
@@ -522,8 +526,8 @@ export function getAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): Maybe<string>;
-export function getAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function getAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): Maybe<string>;
 
@@ -535,8 +539,8 @@ export function hasAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): boolean;
-export function hasAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function hasAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): boolean;
 
@@ -545,8 +549,8 @@ export function removeAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
 ): void;
-export function removeAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function removeAttribute(
+  element: Element | Maybe<Element> | null,
   name: string
 ): void;
 
@@ -605,7 +609,16 @@ export function addEventListener<
 >(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
+  options?: {
+    add?: boolean | AddEventListenerOptions;
+    remove?: boolean | EventListenerOptions;
+  }
+): Maybe<() => void>;
+export function addEventListener(
+  element: EventTarget | Maybe<EventTarget> | null,
+  type: string,
+  listener: EventListenerOrEventListenerObject,
   options?: {
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
@@ -622,7 +635,13 @@ export function removeEventListener<
 >(
   element: E | Maybe<E> | null,
   type: T,
-  listener: EventListenerOrEventListenerObject<E, T>,
+  listener: CustomEventListenerOrEventListenerObject<E, T>,
+  options?: boolean | EventListenerOptions
+): void;
+export function removeEventListener(
+  element: EventTarget | Maybe<EventTarget> | null,
+  type: string,
+  listener: EventListenerOrEventListenerObject,
   options?: boolean | EventListenerOptions
 ): void;
 
@@ -641,8 +660,8 @@ export function toggleAttribute<E extends Element>(
   name: BooleanAttributesOf<E>,
   force?: boolean
 ): boolean;
-export function toggleAttribute<E extends Element>(
-  element: E | Maybe<E> | null,
+export function toggleAttribute(
+  element: Element | Maybe<Element> | null,
   name: string,
   force?: boolean
 ): boolean;
