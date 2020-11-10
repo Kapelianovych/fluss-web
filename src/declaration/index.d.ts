@@ -5,6 +5,36 @@ interface DocumentExtendedEventMap extends DocumentEventMap {
 }
 
 interface CommonEventMap {
+  click: MouseEvent;
+  mouseup: MouseEvent;
+  dblclick: MouseEvent;
+  mousedown: MouseEvent;
+
+  input: InputEvent;
+  beforeinput: InputEvent;
+
+  focusin: FocusEvent;
+  focusout: FocusEvent;
+
+  drag: DragEvent;
+  drop: DragEvent;
+  dragend: DragEvent;
+  dragover: DragEvent;
+  dragexit: DragEvent;
+  dragenter: DragEvent;
+  dragleave: DragEvent;
+  dragstart: DragEvent;
+
+  wheel: WheelEvent;
+
+  touchend: TouchEvent;
+  touchmove: TouchEvent;
+  touchstart: TouchEvent;
+  touchcancel: TouchEvent;
+
+  keyup: KeyboardEvent;
+  keydown: KeyboardEvent;
+
   [key: string]: Event;
 }
 

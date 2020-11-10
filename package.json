@@ -11,6 +11,7 @@
     "url": "https://github.com/YevhenKap/fluss-web"
   },
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "clean": "mkdir -p build; rm -r build/*",
     "build": "npm run clean; rollup -c; npm run copy; npm run test",

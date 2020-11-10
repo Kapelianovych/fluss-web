@@ -1,4 +1,10 @@
-# [0.7.0] - 2020-10-21
+# Unreleased
+
+### Added
+
+- Event types for specific known events to `CommonEventMap` interface.
+
+## [0.7.0] - 2020-10-21
 
 ### Added
 
