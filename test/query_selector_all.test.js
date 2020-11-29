@@ -1,4 +1,5 @@
-import { querySelectorAll } from '../src';
+import { jest } from '@jest/globals';
+import { querySelectorAll } from '../build';
 
 describe('querySelectorAll', () => {
   beforeAll(() => {

@@ -2,7 +2,7 @@ import {
   hasAttribute,
   querySelector,
   removeAttribute,
-} from '../src';
+} from '../build';
 
 describe('removeAttribute', () => {
   test('removeAttribute removes attribute', () => {

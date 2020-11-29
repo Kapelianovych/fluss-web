@@ -1,6 +1,10 @@
-import { Maybe, maybeOf } from '@fluss/core';
+import { Maybe, maybeOf } from '@fluss/core/maybe';
 import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
+/**
+ * Checks if element has attribute.
+ * If element will not exists on the pagge, then `false` will be returned.
+ */
 export function hasAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames

@@ -1,16 +1,10 @@
+export * from './types';
 export { closest } from './closest';
-export { cloneNode } from './clone_node';
-export { removeNode } from './remove_node';
-export { appendNodes } from './append_nodes';
-export { replaceNode } from './replace_node';
-export { prependNodes } from './prepend_nodes';
 export { setAttribute } from './set_attribute';
 export { getAttribute } from './get_attribute';
 export { hasAttribute } from './has_attribute';
 export { querySelector } from './query_selector';
-export { createElement } from './create_element';
 export { removeAttribute } from './remove_attribute';
 export { toggleAttribute } from './toggle_attribute';
 export { querySelectorAll } from './query_selector_all';
 export { addEventListener } from './add_event_listener';
-export { removeEventListener } from './remove_event_listener';

@@ -1,6 +1,7 @@
-import { maybeOf, Maybe } from '@fluss/core';
+import { maybeOf, Maybe } from '@fluss/core/maybe';
 import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
+/** Get attribute value of element. */
 export function getAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames

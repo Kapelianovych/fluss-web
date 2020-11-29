@@ -1,11 +1,11 @@
-import { getAttribute, querySelector } from '../src';
+import { getAttribute, querySelector } from '../build';
 
 describe('getAttribute', () => {
   test('getAttribute function return Maybe with defined result', () => {
     document.body.innerHTML = '<p class="p"></p>';
 
     expect(
-      querySelector<HTMLParagraphElement>('p')
+      querySelector('p')
         .chain((el) => getAttribute(el, 'class'))
         .extract()
     ).toBe('p');

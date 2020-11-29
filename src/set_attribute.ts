@@ -1,6 +1,7 @@
-import { Maybe, maybeOf } from '@fluss/core';
+import { Maybe, maybeOf } from '@fluss/core/maybe';
 import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
+/** Set attribute for element. */
 export function setAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   key: AttributeNamesOf<E> | GlobalAttributeNames,

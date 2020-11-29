@@ -1,5 +1,9 @@
-import { maybeOf, Maybe } from '@fluss/core';
+import { maybeOf, Maybe } from '@fluss/core/maybe';
 
+/**
+ * Select element from parent node. By default selects from **document**.
+ * Safe variant of `document.querySelector` method.
+ */
 export function querySelector<T extends keyof HTMLElementTagNameMap>(
   selector: T,
   parent?: ParentNode | Maybe<ParentNode> | null

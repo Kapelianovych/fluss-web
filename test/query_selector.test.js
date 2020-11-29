@@ -1,4 +1,4 @@
-import { querySelector } from '../src';
+import { querySelector } from '../build';
 
 describe('querySelector', () => {
   test('querySelector function gets element from the page', () => {

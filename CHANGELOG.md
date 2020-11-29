@@ -1,8 +1,16 @@
-# Unreleased
+# [0.8.0] - 2020-11-29
 
 ### Added
 
 - Event types for specific known events to `CommonEventMap` interface.
+
+### Changed
+
+- Separate functions as small modules.
+
+### Removed
+
+- `removeEventListener`, `appendNodes`, `prependNodes`, `cloneNode`, `replaceNode`, `removeNode` and `createElement` methods.
 
 ## [0.7.0] - 2020-10-21
 

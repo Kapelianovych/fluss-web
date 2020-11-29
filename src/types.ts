@@ -1,4 +1,4 @@
-interface DocumentExtendedEventMap extends DocumentEventMap {
+export interface DocumentExtendedEventMap extends DocumentEventMap {
   DOMContentLoaded: Event;
 }
 
@@ -6,7 +6,7 @@ interface DocumentExtendedEventMap extends DocumentEventMap {
  * If event has common `Event` type, it is not listed separately,
  * because it is suited for index type.
  */
-interface CommonEventMap {
+export interface CommonEventMap {
   click: MouseEvent;
   mouseup: MouseEvent;
   dblclick: MouseEvent;

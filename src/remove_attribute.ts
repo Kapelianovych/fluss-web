@@ -1,7 +1,7 @@
-import { hasAttribute } from './has_attribute';
-import { Maybe, maybeOf } from '@fluss/core';
+import { Maybe, maybeOf } from '@fluss/core/maybe';
 import type { AttributeNamesOf, GlobalAttributeNames } from './types';
 
+/** Removes attribute from element if it has one. */
 export function removeAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames
@@ -14,7 +14,5 @@ export function removeAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames | string
 ): void {
-  if (hasAttribute(element, name)) {
-    maybeOf(element).map((el) => el.removeAttribute(name));
-  }
+  maybeOf(element).map((el) => el.removeAttribute(name));
 }

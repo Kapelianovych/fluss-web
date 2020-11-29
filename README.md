@@ -99,21 +99,6 @@ Find closest ancestor that match selector.
 const parent /*: Maybe<Element> */ = closest('.block', childElement);
 ```
 
-### createElement
-
-```typescript
-function createElement<T extends keyof HTMLElementTagNameMap>(
-  tagName: T,
-  options?: ElementCreationOptions
-): Wrapper<HTMLElementTagNameMap[T]>;
-```
-
-Create an instance of element of the specified tag.
-
-```typescript
-const element /*: Wrapper<HTMLDivElement> */ = createElement('div');
-```
-
 ### setAttribute
 
 ```typescript
@@ -205,85 +190,6 @@ const hasElementAttribute /*: boolean */ = toogleAttribute(
 ).extract();
 ```
 
-### appendNodes
-
-```typescript
-function appendNodes(
-  parent: ParentNode | Maybe<ParentNode> | null,
-  ...children: ReadonlyArray<string | Node>
-): void;
-```
-
-Insert _childs_ after last child of _parent_ element. Strings are are teplaced with `Text` elements.
-
-```typescript
-querySelector('p').map((el) => {
-  createElement('a').map((a) => appendNodes(el, a));
-});
-```
-
-### prependNodes
-
-```typescript
-function prependNodes(
-  parent: ParentNode | Maybe<ParentNode> | null,
-  ...children: ReadonlyArray<string | Node>
-): void;
-```
-
-Insert _childs_ before first child of _parent_ element. Strings are are teplaced with `Text` elements.
-
-```typescript
-querySelector('p').map((el) => {
-  createElement('a').map((a) => prependNodes(el, a));
-});
-```
-
-### replaceNode
-
-```typescript
-function replaceNode(
-  node: ChildNode | Maybe<ChildNode> | null,
-  ...newNodes: ReadonlyArray<string | Node>
-): void;
-```
-
-Replace _node_ with _newNodes_. Strings are replaced with `Text`s.
-
-```typescript
-querySelector('p').map((el) => {
-  createElement('a').map((a) => replaceNode(el, a));
-});
-```
-
-### removeNode
-
-```typescript
-function removeNode(node: ChildNode | Maybe<ChildNode> | null): void;
-```
-
-Removes _node_.
-
-```typescript
-querySelector('p').map(removeNode);
-```
-
-### cloneNode
-
-```typescript
-function cloneNode<T extends Node>(
-  node: T | Maybe<T> | null,
-  deep?: boolean
-): Maybe<T>;
-```
-
-Clone node. If _deep_ is `true`, function returns node with all descendants. By default _deep_ is `false`.
-
-```typescript
-const clonedP: /*: Element */ = cloneNode(somePElement);
-const clonedDiv: /*: Maybe<Element> */ = cloneNode(querySelector('p'));
-```
-
 ### addEventListener
 
 ```typescript
@@ -295,7 +201,7 @@ function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
     add?: boolean | AddEventListenerOptions;
     remove?: boolean | EventListenerOptions;
   } = {}
-): Maybe<() => void>;
+): () => void;
 ```
 
 Appends an event listener for events whose type attribute value is type.
@@ -304,32 +210,12 @@ The listener argument sets the callback that will be invoked when the event is d
 `options.add` is options for native _addEventListener_ method and
 `options.remove` is options for native _removeEventListener_ method.
 
-Returns `Maybe` with function if _element_ is `Maybe<T>`, otherwise function itself, that removes `listener` from _element_ with same `type` and options.
+Returns function that removes `listener` from _element_ with same `type` and options.
 
 ```typescript
-const removeClickOnParagraphListener /*: () => void */ = querySelector<
-  HTMLParagraphElement
->('p')
+const removeClickOnParagraphListener /*: () => void */ = querySelector<HTMLParagraphElement>(
+  'p'
+)
   .map((p) => addEventListener(p, 'click', console.log))
   .extract();
-```
-
-### removeEventListener
-
-```typescript
-function removeEventListener<
-  E extends EventTarget,
-  T extends keyof EventMapOf<E>
->(
-  element: E | Maybe<E> | null,
-  type: T,
-  listener: CustomEventListenerOrEventListenerObject<E, T>,
-  options?: boolean | EventListenerOptions
-): void;
-```
-
-Removes the event listener in target's event listener list with the same type, callback, and options.
-
-```typescript
-removeEventListener(someElement, 'click', someListener);
 ```

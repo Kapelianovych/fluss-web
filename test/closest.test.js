@@ -1,4 +1,4 @@
-import { closest, querySelector } from '../src';
+import { closest, querySelector } from '../build';
 
 describe('closest', () => {
   beforeAll(() => {

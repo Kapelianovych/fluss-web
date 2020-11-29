@@ -1,4 +1,4 @@
-import { hasAttribute, querySelector } from '../src';
+import { hasAttribute, querySelector } from '../build';
 
 describe('hasAttribute', () => {
   test('hasAttribute returns true if attribute exists in element', () => {

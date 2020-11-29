@@ -1,4 +1,4 @@
-import { setAttribute, querySelector } from '../src';
+import { setAttribute, querySelector } from '../build';
 
 describe('setAttribute', () => {
   test('setAttribute sets attribute of element', () => {
