@@ -25,7 +25,7 @@
   "author": "Kapelianovych Yevhen",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^6.1.0",
+    "@rollup/plugin-typescript": "^8.0.0",
     "@types/jest": "^26.0.15",
     "jest": "^26.6.3",
     "rollup": "^2.34.0",
