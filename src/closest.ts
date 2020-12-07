@@ -1,4 +1,4 @@
-import { Maybe, maybeOf } from '@fluss/core/maybe';
+import { Maybe, maybe } from '@fluss/core/maybe';
 
 /**
  * Gets parent element of child element.
@@ -8,7 +8,7 @@ export function closest<T extends Element>(
   selector: string,
   child: Element | Maybe<Element> | null
 ): Maybe<T> {
-  return maybeOf(child).map((childElement) =>
+  return maybe(child).map((childElement) =>
     childElement.closest<T>(selector)
   );
 }

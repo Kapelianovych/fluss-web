@@ -1,8 +1,4 @@
-import {
-  hasAttribute,
-  querySelector,
-  removeAttribute,
-} from '../build';
+import { hasAttribute, querySelector, removeAttribute } from '../build';
 
 describe('removeAttribute', () => {
   test('removeAttribute removes attribute', () => {
@@ -17,6 +13,10 @@ describe('removeAttribute', () => {
         .map((el) => hasAttribute(el, 'class'))
         .extract()
     ).toBe(false);
+  });
+
+  test('removeAttribute accepts Maybe object.', () => {
+    expect(() => removeAttribute(querySelector('p'), 'class')).not.toThrow();
   });
 
   test('removeAttribute does nothing if attribute does not exists.', () => {

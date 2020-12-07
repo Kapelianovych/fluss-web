@@ -1,4 +1,4 @@
-import { Maybe, maybeOf } from '@fluss/core/maybe';
+import { Maybe, maybe } from '@fluss/core/maybe';
 import type {
   EventMapOf,
   CustomEventListenerOrEventListenerObject,
@@ -52,7 +52,7 @@ export function addEventListener<
   // exists in EventMapOf<E> type. TypeScript possibly cannot narrow type here.
   // Also TypeScript's EventListenerOrEventListenerObject cannot narrow event type :(
   return (
-    maybeOf(element)
+    maybe(element)
       .map((target) => {
         target.addEventListener(
           type as string,

@@ -1,4 +1,4 @@
-import { Maybe, maybeOf } from '@fluss/core/maybe';
+import { Maybe, maybe } from '@fluss/core/maybe';
 
 /**
  * Select elements from parent node. By default selects from **document**.
@@ -17,7 +17,7 @@ export function querySelectorAll<T extends Element>(
   parent?: ParentNode | Maybe<ParentNode> | null
 ): ReadonlyArray<T> {
   const array: Array<T> = [];
-  maybeOf(parent || document).map((parentElement) =>
+  maybe(parent ?? document).map((parentElement) =>
     parentElement
       .querySelectorAll<T>(selector)
       .forEach((item) => array.push(item))

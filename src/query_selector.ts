@@ -1,4 +1,4 @@
-import { maybeOf, Maybe } from '@fluss/core/maybe';
+import { maybe, Maybe } from '@fluss/core/maybe';
 
 /**
  * Select element from parent node. By default selects from **document**.
@@ -16,7 +16,7 @@ export function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode> | null
 ): Maybe<T> {
-  return maybeOf(parent || document).map((element) =>
+  return maybe(parent ?? document).map((element) =>
     element.querySelector<T>(selector)
   );
 }

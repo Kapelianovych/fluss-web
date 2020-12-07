@@ -1,4 +1,4 @@
-import { Maybe, maybeOf } from '@fluss/core/maybe';
+import { Maybe, maybe } from '@fluss/core/maybe';
 import type { BooleanAttributesOf } from './types';
 
 /**
@@ -27,7 +27,7 @@ export function toggleAttribute<E extends Element>(
   force?: boolean
 ): boolean {
   return Boolean(
-    maybeOf(element)
+    maybe(element)
       .map((el) => el.toggleAttribute(name, force))
       .extract()
   );

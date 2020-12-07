@@ -15,6 +15,10 @@ describe('toggleAttribute', () => {
     });
   });
 
+  test('toggleAttribute accepts Maybe object.', () => {
+    expect(toggleAttribute(querySelector('input'), 'disabled')).toBe(true);
+  });
+
   test('toggleAttribute with "force" causes to adding or removing attribute', () => {
     querySelector('input').map((input) => {
       toggleAttribute(input, 'readonly', false);
