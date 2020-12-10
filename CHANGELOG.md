@@ -1,4 +1,10 @@
-# [0.8.1] - 2020-12-07
+# Unreleased
+
+### Changed
+
+- Rename `addEventListener` to `on`.
+
+## [0.8.1] - 2020-12-07
 
 ### Changed
 

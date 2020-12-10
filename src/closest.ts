@@ -7,8 +7,6 @@ import { Maybe, maybe } from '@fluss/core/maybe';
 export function closest<T extends Element>(
   selector: string,
   child: Element | Maybe<Element> | null
-): Maybe<T> {
-  return maybe(child).map((childElement) =>
-    childElement.closest<T>(selector)
-  );
+): Maybe<T | null> {
+  return maybe(child).map((childElement) => childElement.closest<T>(selector));
 }

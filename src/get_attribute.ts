@@ -13,6 +13,6 @@ export function getAttribute(
 export function getAttribute<E extends Element>(
   element: E | Maybe<E> | null,
   name: AttributeNamesOf<E> | GlobalAttributeNames | string
-): Maybe<string> {
+): Maybe<string | null> {
   return maybe(element).map((el) => el.getAttribute(name));
 }

@@ -11,11 +11,11 @@ export function querySelector<T extends keyof HTMLElementTagNameMap>(
 export function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode> | null
-): Maybe<T>;
+): Maybe<T | null>;
 export function querySelector<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode> | null
-): Maybe<T> {
+): Maybe<T | null> {
   return maybe(parent ?? document).map((element) =>
     element.querySelector<T>(selector)
   );

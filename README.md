@@ -190,10 +190,10 @@ const hasElementAttribute /*: boolean */ = toogleAttribute(
 ).extract();
 ```
 
-### addEventListener
+### on
 
 ```typescript
-function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
+function on<E extends EventTarget, T extends keyof EventMapOf<E>>(
   element: E | Maybe<E> | null,
   type: T,
   listener: CustomEventListenerOrEventListenerObject<E, T>,
@@ -204,7 +204,7 @@ function addEventListener<E extends EventTarget, T extends keyof EventMapOf<E>>(
 ): () => void;
 ```
 
-Appends an event listener for events whose type attribute value is type.
+Add an event listener to element.
 The listener argument sets the callback that will be invoked when the event is dispatched.
 
 `options.add` is options for native _addEventListener_ method and
@@ -216,6 +216,6 @@ Returns function that removes `listener` from _element_ with same `type` and opt
 const removeClickOnParagraphListener /*: () => void */ = querySelector<HTMLParagraphElement>(
   'p'
 )
-  .map((p) => addEventListener(p, 'click', console.log))
+  .map((p) => on(p, 'click', console.log))
   .extract();
 ```
