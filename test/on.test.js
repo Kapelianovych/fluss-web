@@ -1,5 +1,5 @@
 import { maybe } from '@fluss/core';
-import { on, querySelector } from '../build';
+import { on, query } from '../build';
 
 describe('on', () => {
   beforeAll(() => {
@@ -12,7 +12,7 @@ describe('on', () => {
   test('on adds listener to element', () => {
     let event = null;
 
-    querySelector('.first').map((element) => {
+    query('.first').map((element) => {
       on(element, 'fullscreenchange', (evt) => {
         event = evt;
       });
@@ -26,7 +26,7 @@ describe('on', () => {
   test('on adds listener to maybe element', () => {
     let event = null;
 
-    querySelector('.first', maybe(document)).map((element) => {
+    query('.first', maybe(document)).map((element) => {
       on(element, 'fullscreenchange', (evt) => {
         event = evt;
       });
@@ -40,7 +40,7 @@ describe('on', () => {
   test('on returns function that remove previously added listener', () => {
     let event = null;
 
-    querySelector('.second').map((element) => {
+    query('.second').map((element) => {
       const detach = on(element, 'animationcancel', (evt) => {
         event = evt;
       });

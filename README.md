@@ -5,7 +5,7 @@
 ## Example use
 
 ```typescript
-const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return "null" if element doesn't exist on the page.
+const maybeBlock /*: Maybe<Element> */ = query('.block'); // Result is wrapped in `Maybe` because `document.querySelector` may return "null" if element doesn't exist on the page.
 ```
 
 ## Design goals
@@ -14,7 +14,6 @@ const maybeBlock /*: Maybe<Element> */ = querySelector('.block'); // Result is w
 - The implementation of each function should be as minimal as possible.
 - All functions are immutable, and there are no side-effects.
 - All functions must be safe as much as possible.
-- Fixed number of arguments (preferably 3) whenever possible.
 - Do not override native methods, if they are already safe.
 
 ## @fluss/web's advantages
@@ -38,7 +37,9 @@ npm i @fluss/web
 ## Import
 
 ```js
-import { querySelector } from '@fluss/web';
+import { query } from '@fluss/web';
+// or
+import { query } from '@fluss/web/query';
 ```
 
 ## API
@@ -47,10 +48,10 @@ Package is bundled as _ES module_. It doesn't support _CommonJS_. If you need it
 
 > In TypeScript examples is used [Flow](https://flow.org)'s comment notation if type is inferred.
 
-### querySelector
+### query
 
 ```typescript
-function querySelector<T extends Element>(
+function query<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode> | null
 ): Maybe<T>;
@@ -59,8 +60,8 @@ function querySelector<T extends Element>(
 Select element on the page.
 
 ```typescript
-const same /*: Maybe<Element> */ = querySelector('.gd'); // search inside whole document
-const inner /*: Maybe<HTMLElement> */ = querySelector<HTMLElement>('.gd', same); // search inside same
+const same /*: Maybe<Element> */ = query('.gd'); // search inside whole document
+const inner /*: Maybe<HTMLElement> */ = query<HTMLElement>('.gd', same); // search inside same
 ```
 
 ### querySelectorAll
@@ -112,7 +113,7 @@ function setAttribute<E extends Element>(
 Set attribute for element.
 
 ```typescript
-querySelector('div').map((el) => setAttribute(el, 'class', 'el'));
+query('div').map((el) => setAttribute(el, 'class', 'el'));
 ```
 
 ### getAttribute
@@ -127,7 +128,7 @@ function getAttribute<E extends Element>(
 Gets attribute value of element.
 
 ```typescript
-const attributeValue /*: Maybe<string> */ = querySelector('div').chain((el) =>
+const attributeValue /*: Maybe<string> */ = query('div').chain((el) =>
   getAttribute(el, 'class')
 );
 ```
@@ -144,10 +145,7 @@ function hasAttribute<E extends Element>(
 Checks if element has attribute.
 
 ```typescript
-const hasElementAttribute /*: boolean */ = hasAttribute(
-  querySelector('div'),
-  'class'
-);
+const hasElementAttribute /*: boolean */ = hasAttribute(query('div'), 'class');
 ```
 
 ### removeAttribute
@@ -162,7 +160,7 @@ function removeAttribute<E extends Element>(
 Removes attribute from element if it has one.
 
 ```typescript
-const hasElementAttribute /*: boolean */ = querySelector('div')
+const hasElementAttribute /*: boolean */ = query('div')
   .map((el) => {
     removeAttribute(el, 'class');
     return el;
@@ -185,7 +183,7 @@ Toggles a `Boolean attribute` (removing it if it is present and adding it if it 
 
 ```typescript
 const hasElementAttribute /*: boolean */ = toogleAttribute(
-  querySelector('input'),
+  query('input'),
   'readonly'
 ).extract();
 ```
@@ -213,7 +211,7 @@ The listener argument sets the callback that will be invoked when the event is d
 Returns function that removes `listener` from _element_ with same `type` and options.
 
 ```typescript
-const removeClickOnParagraphListener /*: () => void */ = querySelector<HTMLParagraphElement>(
+const removeClickOnParagraphListener /*: () => void */ = query<HTMLParagraphElement>(
   'p'
 )
   .map((p) => on(p, 'click', console.log))

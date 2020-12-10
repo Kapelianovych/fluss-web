@@ -3,6 +3,7 @@
 ### Changed
 
 - Rename `addEventListener` to `on`.
+- Rename `querySelector` to `query`.
 
 ## [0.8.1] - 2020-12-07
 

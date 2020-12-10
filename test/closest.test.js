@@ -1,4 +1,4 @@
-import { closest, querySelector } from '../build';
+import { closest, query } from '../build';
 
 describe('closest', () => {
   beforeAll(() => {
@@ -11,12 +11,12 @@ describe('closest', () => {
 
   test('closest function gets parent element', () => {
     expect(
-      querySelector('.child')
+      query('.child')
         .chain((child) => closest('.parent', child))
         .isJust()
     ).toBe(true);
     expect(
-      querySelector('.child')
+      query('.child')
         .chain((child) => closest('.parent', child))
         .map((el) => el.innerHTML)
         .extract()
@@ -25,7 +25,7 @@ describe('closest', () => {
 
   test('closest function does not fail if parent element is not extsts', () => {
     expect(
-      querySelector('.child')
+      query('.child')
         .chain((child) => closest('.other-parent', child))
         .isNothing()
     ).toBe(true);
