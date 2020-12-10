@@ -4,6 +4,7 @@
 
 - Rename `addEventListener` to `on`.
 - Rename `querySelector` to `query`.
+- Rename `querySelectorAll` to `queryAll`.
 
 ## [0.8.1] - 2020-12-07
 

@@ -64,10 +64,10 @@ const same /*: Maybe<Element> */ = query('.gd'); // search inside whole document
 const inner /*: Maybe<HTMLElement> */ = query<HTMLElement>('.gd', same); // search inside same
 ```
 
-### querySelectorAll
+### queryAll
 
 ```typescript
-function querySelectorAll<T extends Element>(
+function queryAll<T extends Element>(
   selector: string,
   parent?: ParentNode | Maybe<ParentNode> | null
 ): ReadonlyArray<T>;
@@ -76,10 +76,8 @@ function querySelectorAll<T extends Element>(
 Select elements on the page.
 
 ```typescript
-const same /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
-  '.gd'
-); // search inside whole document
-const inner /*: ReadonlyArray<HTMLElement> */ = querySelectorAll<HTMLElement>(
+const same /*: ReadonlyArray<HTMLElement> */ = queryAll<HTMLElement>('.gd'); // search inside whole document
+const inner /*: ReadonlyArray<HTMLElement> */ = queryAll<HTMLElement>(
   '.gd',
   someElement
 ); // search inside someElement
