@@ -1,4 +1,4 @@
-# Unreleased
+# [0.9.0] - 2020-12-11
 
 ### Changed
 
